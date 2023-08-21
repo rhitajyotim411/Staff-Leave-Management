@@ -1,25 +1,42 @@
 <?php
-require_once '../connect.php';
 
-$tbname = "admin_login";
-$uid = $_POST["uid"];
-$passwd = $_POST["passwd"];
+session_start();
+$msg = '';
 
-$stmt = $conn->query("SELECT passwd from {$tbname} where uid='{$uid}'");
-$data = $stmt->fetch(PDO::FETCH_ASSOC);
+// If user has given a captcha!
+if (isset($_POST['captcha']))
 
-if ($stmt->rowCount() < 1) {
-    echo "No such user present";
-    echo '<br>';
-    echo "<a href='./register.html'>Register here</a>";
-} else {
-    if (password_verify($passwd, $data['passwd'])) {
-        echo "UID {$uid} succesfully logged in";
-        echo "<br>";
-        echo "<a href='./dashboard.html'>Go to dashboard</a>";
-    } else {
-        echo "Wrong password";
-        echo '<br>';
-        echo "<a href='./login.html'>Re-Login</a>";
+    // If the captcha is valid
+    if ($_POST['captcha'] == $_SESSION['captcha'])
+        $msg = '<span style="color:green">SUCCESSFUL!!!</span>';
+    else {
+        $msg = '<span style="color:red">CAPTCHA FAILED!!!</span>';
     }
-}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+
+<body>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <label for="uid">Admin ID: </label>
+        <input name="uid" type="text" length="100" maxlength="255"
+        value="<?php if (isset($_POST['uid'])) echo "hello"; ?>"><br>
+        <label for="passwd">Password: </label>
+        <input name="passwd" type="password" length="100" maxlength="255"><br>
+        <img id="captch" src="../captcha.php">
+        <a onclick="ck_data" href='<?php echo $_SERVER['PHP_SELF']; ?>'>Refresh</a><br>
+        <label for="passwd">Captcha: </label>
+        <input type="text" name="captcha" autocomplete="off" />
+        <?php echo $msg; ?><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>

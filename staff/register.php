@@ -28,5 +28,7 @@ if ($stmt->rowCount() > 0) {
         echo "Insertion failed: " . $e->getMessage();
     }
 
-    echo "{$uid} successfully inserted";
+    echo "{$uid} successfully registered";
+    echo "<br>";
+    echo "<a href='./dashboard.html'>Go to dashboard</a>";
 }
