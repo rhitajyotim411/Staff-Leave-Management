@@ -2,6 +2,10 @@
 
 session_start();
 $msg = '';
+$uid='hello';
+var_dump($_POST);
+if (isset($_POST['uid']))
+$uid = $_POST['uid'];
 
 // If user has given a captcha!
 if (isset($_POST['captcha']))
@@ -27,7 +31,7 @@ if (isset($_POST['captcha']))
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <label for="uid">Admin ID: </label>
         <input name="uid" type="text" length="100" maxlength="255"
-        value="<?php if (isset($_POST['uid'])) echo "hello"; ?>"><br>
+        value="<?php echo $uid; ?>"><br>
         <label for="passwd">Password: </label>
         <input name="passwd" type="password" length="100" maxlength="255"><br>
         <img id="captch" src="../captcha.php">
