@@ -20,6 +20,6 @@ if ($stmt->rowCount() < 1) {
     } else {
         echo "Wrong password";
         echo '<br>';
-        echo "<a href='./login.html'>Re-Login</a>";
+        echo "<a href='./login.php'>Re-Login</a>";
     }
 }
