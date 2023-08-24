@@ -42,7 +42,7 @@ if (isset($_POST['passwd']))
 <body>
     <form action="<?php echo htmlspecialchars($url); ?>" method="post">
         <label for="uid">Staff ID: </label>
-        <input name="uid" type="text" length="100" maxlength="255"
+        <input name="uid" type="text" length="10" maxlength="10"
         value="<?php echo $uid?>"><br><br>
         <label for="passwd">Password: </label>
         <input name="passwd" type="password" length="100" maxlength="255"

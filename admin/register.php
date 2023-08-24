@@ -1,34 +1,61 @@
 <?php
-require_once '../connect.php';
 
-$tbname = "admin_login";
-$uid = $_POST["uid"];
-$name = $_POST["name"];
-$passwd = $_POST["passwd"];
+session_start();
+$url = $_SERVER['PHP_SELF'];
+$vrf = '';
+$btn = 'Verify';
+$cpch = '<img id="captch" src="../captcha.php">&emsp;
+<input type="submit" value="Refresh"><br><br>
+<label for="captcha" name="captcha">Captcha: </label>
+<input type="text" name="captcha" autocomplete="off" />&emsp;';
 
-$stmt = $conn->query("SELECT passwd from {$tbname} where uid='{$uid}'");
-$data = $stmt->fetch(PDO::FETCH_ASSOC);
+// If user has given a captcha!
+if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != '')
 
-if ($stmt->rowCount() > 0) {
-    echo "{$uid} already registered";
-    echo "<br>";
-    echo "<a href='./login.html'>Login here</a>";
-} else {
-    try {
-        $sql = "INSERT INTO {$tbname} VALUES(:uid, :name, :passwd)";
-
-        $stmt = $conn->prepare($sql);
-
-        $stmt->execute([
-            ':uid' => $uid,
-            ':name' => $name,
-            ':passwd' => password_hash($passwd, PASSWORD_DEFAULT)
-        ]);
-    } catch (PDOException $e) {
-        echo "Insertion failed: " . $e->getMessage();
+    // If the captcha is valid
+    if ($_POST['captcha'] == $_SESSION['captcha']) {
+        $vrf = '<span style="color:green">CAPTCHA SUCCESSFULLY VERIFIED!!</span>';
+        $btn = 'Register';
+        $cpch = '';
+        $url = './register_db.php';
+    } else {
+        $vrf = '<span style="color:red">CAPTCHA FAILED!!!</span>';
     }
 
-    echo "{$uid} successfully registered";
-    echo "<br>";
-    echo "<a href='./dashboard.html'>Go to dashboard</a>";
-}
+$uid = $name = $passwd = "";
+
+if (isset($_POST['uid']))
+    $uid = $_POST['uid'];
+if (isset($_POST['name']))
+    $name = $_POST['name'];
+if (isset($_POST['passwd']))
+    $passwd = $_POST['passwd'];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Register</title>
+</head>
+
+<body>
+    <form action="<?php echo htmlspecialchars($url); ?>" method="post">
+        <label for="uid">Admin ID: </label>
+        <input name="uid" type="text" length="10" maxlength="10"
+        value="<?php echo $uid?>"><br><br>
+        <label for="name">Full Name: </label>
+        <input name="name" type="text" length="100" maxlength="255"
+        value="<?php echo $name?>"><br><br>
+        <label for="passwd">Password: </label>
+        <input name="passwd" type="password" length="100" maxlength="255"
+        value="<?php echo $passwd?>"><br><br>
+        <?php echo $cpch; ?>
+        <?php echo $vrf; ?><br><br>
+        <input type="submit" name="submit" value="<?php echo $btn; ?>">
+    </form>
+</body>
+
+</html>

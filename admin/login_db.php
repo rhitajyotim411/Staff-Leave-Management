@@ -11,7 +11,7 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($stmt->rowCount() < 1) {
     echo "No such user present";
     echo '<br>';
-    echo "<a href='./register.html'>Register here</a>";
+    echo "<a href='./register.php'>Register here</a>";
 } else {
     if (password_verify($passwd, $data['passwd'])) {
         echo "UID {$uid} succesfully logged in";
