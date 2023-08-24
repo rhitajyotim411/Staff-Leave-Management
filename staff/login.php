@@ -1,25 +1,56 @@
 <?php
-require_once '../connect.php';
 
-$tbname = "staff_login";
-$uid = $_POST["uid"];
-$passwd = $_POST["passwd"];
+session_start();
+$url = $_SERVER['PHP_SELF'];
+$vrf = '';
+$btn = 'Verify';
+$cpch = '<img id="captch" src="../captcha.php">&emsp;
+<input type="submit" value="Refresh"><br><br>
+<label for="captcha" name="captcha">Captcha: </label>
+<input type="text" name="captcha" autocomplete="off" />&emsp;';
 
-$stmt = $conn->query("SELECT passwd from {$tbname} where uid='{$uid}'");
-$data = $stmt->fetch(PDO::FETCH_ASSOC);
+// If user has given a captcha!
+if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha']!='')
 
-if ($stmt->rowCount() < 1) {
-    echo "No such user present";
-    echo '<br>';
-    echo "<a href='./register.html'>Register here</a>";
-} else {
-    if (password_verify($passwd, $data['passwd'])) {
-        echo "UID {$uid} succesfully logged in";
-        echo "<br>";
-        echo "<a href='./dashboard.html'>Go to dashboard</a>";
+    // If the captcha is valid
+    if ($_POST['captcha'] == $_SESSION['captcha']) {
+        $vrf = '<span style="color:green">CAPTCHA SUCCESSFULLY VERIFIED!!</span>';
+        $btn = 'Submit';
+        $cpch = '';
+        $url = './login_db.php';
     } else {
-        echo "Wrong password";
-        echo '<br>';
-        echo "<a href='./login.html'>Re-Login</a>";
+        $vrf = '<span style="color:red">CAPTCHA FAILED!!!</span>';
     }
-}
+
+$uid = $passwd = "";
+
+if (isset($_POST['uid']))
+    $uid = $_POST['uid'];
+if (isset($_POST['passwd']))
+    $passwd = $_POST['passwd'];
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+
+<body>
+    <form action="<?php echo htmlspecialchars($url); ?>" method="post">
+        <label for="uid">Staff ID: </label>
+        <input name="uid" type="text" length="100" maxlength="255"
+        value="<?php echo $uid?>"><br><br>
+        <label for="passwd">Password: </label>
+        <input name="passwd" type="password" length="100" maxlength="255"
+        value="<?php echo $passwd?>"><br><br>
+        <?php echo $cpch; ?>
+        <?php echo $vrf; ?><br><br>
+        <input type="submit" name="submit" value="<?php echo $btn; ?>">
+    </form>
+</body>
+
+</html>
