@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 $length_of_string = 5;
@@ -37,11 +36,11 @@ $y = rand(0, 5);
 imagestring($im, 5, $x, $y, $captcha, $fg);
 
 // strike through
-imageline($im, 0, $y+8, $iw, $y+8, $fg); // x1, y1, x2, y2
+imageline($im, 0, $y + 8, $iw, $y + 8, $fg); // x1, y1, x2, y2
 
 // cross
 $t = rand(0, 1) ? 0 : $ih;
-imageline($im, 0, $t, $iw, $ih-$t, $ln); // x1, y1, x2, y2
+imageline($im, 0, $t, $iw, $ih - $t, $ln); // x1, y1, x2, y2
 
 // VERY IMPORTANT: Prevent any Browser Cache!!
 header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.

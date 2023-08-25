@@ -6,6 +6,6 @@
     <title>Staff Dashboard</title>
 </head>
 <body>
-    <a href="./leave.html">Apply for leave</a>
+    <a href="./leave.php">Apply for leave</a>
 </body>
 </html>
