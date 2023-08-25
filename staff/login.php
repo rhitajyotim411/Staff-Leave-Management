@@ -1,6 +1,21 @@
 <?php
-
 session_start();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+
+<?php
+if (isset($_SESSION['UID'])) {
+    die("{$_SESSION['UID']} already logged in");
+}
+
 $url = $_SERVER['PHP_SELF'];
 $vrf = '';
 $btn = 'Verify';
@@ -10,7 +25,7 @@ $cpch = '<img id="captch" src="../captcha.php">&emsp;
 <input type="text" name="captcha" autocomplete="off" />&emsp;';
 
 // If user has given a captcha!
-if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha']!='')
+if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != '')
 
     // If the captcha is valid
     if ($_POST['captcha'] == $_SESSION['captcha']) {
@@ -30,23 +45,12 @@ if (isset($_POST['passwd']))
     $passwd = $_POST['passwd'];
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-</head>
-
 <body>
     <form action="<?php echo htmlspecialchars($url); ?>" method="post">
         <label for="uid">Staff ID: </label>
-        <input name="uid" type="text" length="10" maxlength="10"
-        value="<?php echo $uid?>"><br><br>
+        <input name="uid" type="text" length="10" maxlength="10" value="<?php echo $uid ?>"><br><br>
         <label for="passwd">Password: </label>
-        <input name="passwd" type="password" length="100" maxlength="255"
-        value="<?php echo $passwd?>"><br><br>
+        <input name="passwd" type="password" length="100" maxlength="255" value="<?php echo $passwd ?>"><br><br>
         <?php echo $cpch; ?>
         <?php echo $vrf; ?><br><br>
         <input type="submit" name="submit" value="<?php echo $btn; ?>">
