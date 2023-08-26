@@ -13,7 +13,9 @@ session_start();
 
 <?php
 if (isset($_SESSION['UID'])) {
-    die("{$_SESSION['UID']} already logged in");
+    echo "{$_SESSION['UID']} already logged in<br>";
+    echo "redirecting to dashboard...";
+    die(header("refresh:3; URL=../{$_SESSION['type']}/dashboard.php"));
 }
 
 $url = $_SERVER['PHP_SELF'];

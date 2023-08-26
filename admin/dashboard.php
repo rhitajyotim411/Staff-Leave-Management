@@ -13,15 +13,27 @@ session_start();
 
 <?php
 if (!isset($_SESSION['UID'])) {
-    die(header("Location: login.php"));
+    echo "Please login to continue<br>";
+    echo "Redirecting to login page...";
+    die(header("refresh:3; URL=./login.php"));
 }
 if ($_SESSION['type'] != 'admin') {
-    die('<h2 style="color: red">Access Denied!!</h2><br>Not an admin');
+    echo '<h2 style="color: red">Access Denied!!</h2>';
+    echo 'Not an admin, redirecting to dashboard...';
+    die(header("refresh:3; URL=../staff/dashboard.php"));
 }
 ?>
 
 <body>
-    <a href='./update.php'>Update leave</a>
+    <p>Dashboard: - </p>
+    <ul>
+        <li>
+            <a href='./update.php'>Update leave</a>
+        </li>
+        <li>
+            <a href="../logout.php">Logout</a>
+        </li>
+    </ul>
 </body>
 
 </html>

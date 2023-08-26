@@ -13,11 +13,16 @@ session_start();
 
 <body>
     <?php
+    if (!isset($_SESSION['UID'])) {
+        echo "No user logged in<br>";
+        echo "Redirecting...";
+        die(header("refresh:3; URL=./index.php"));
+    }
+
     $uid = $_SESSION['UID'];
     try {
         // remove all session variables
         session_unset();
-
         // destroy the session
         session_destroy();
     } catch (\Throwable $th) {
@@ -25,6 +30,8 @@ session_start();
     }
 
     echo "$uid successfully logged out";
+    echo "Redirecting to homepage...";
+    header("refresh:3; URL=./index.php");
     ?>
 </body>
 
