@@ -8,13 +8,13 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Register</title>
+    <title>Staff Register</title>
 </head>
 
 <?php
 if (isset($_SESSION['UID'])) {
     echo "{$_SESSION['UID']} already logged in<br>";
-    echo "redirecting to dashboard...";
+    echo "Redirecting to dashboard...";
     die(header("refresh:3; URL=../{$_SESSION['type']}/dashboard.php"));
 }
 

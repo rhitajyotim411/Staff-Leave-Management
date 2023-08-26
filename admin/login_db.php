@@ -14,9 +14,6 @@ $tbname = "admin_login";
 $uid = $_POST["uid"];
 $passwd = $_POST["passwd"];
 
-$_SESSION['UID'] = $uid;
-$_SESSION['type'] = 'admin';
-
 $stmt = $conn->query("SELECT passwd from {$tbname} where uid='{$uid}'");
 $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -27,6 +24,8 @@ if ($stmt->rowCount() < 1) {
     echo "or <a href='./login.php'>login again</a>";
 } else {
     if (password_verify($passwd, $data['passwd'])) {
+        $_SESSION['UID'] = $uid;
+        $_SESSION['type'] = 'admin';
         echo "{$uid} succesfully logged in<br>";
         echo "Redirecting to dashboard...";
         header("refresh:3; URL=./dashboard.php");

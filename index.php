@@ -15,7 +15,7 @@ session_start();
   <?php
   if (isset($_SESSION['UID'])) {
     echo "{$_SESSION['UID']} already logged in<br>";
-    echo "redirecting to dashboard...";
+    echo "Redirecting to dashboard...";
     die(header("refresh:3; URL=./{$_SESSION['type']}/dashboard.php"));
   }
   ?>
@@ -29,7 +29,7 @@ session_start();
     </li>
   </ul>
 
-  Not a user? Register <a href="register.php">here</a>.
+  Not an user? Register <a href="register.php">here</a>.
 </body>
 
 </html>

@@ -15,9 +15,6 @@ $uid = $_POST["uid"];
 $name = $_POST["name"];
 $passwd = $_POST["passwd"];
 
-$_SESSION['UID'] = $uid;
-$_SESSION['type'] = 'staff';
-
 $stmt = $conn->query("SELECT passwd from {$tbname} where uid='{$uid}'");
 $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -39,6 +36,9 @@ if ($stmt->rowCount() > 0) {
     } catch (PDOException $e) {
         echo "Insertion failed: " . $e->getMessage();
     }
+
+    $_SESSION['UID'] = $uid;
+    $_SESSION['type'] = 'staff';
 
     echo "{$uid} successfully registered<br>";
     echo "Redirecting to dashboard...";

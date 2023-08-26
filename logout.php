@@ -29,7 +29,7 @@ session_start();
         echo "$UID cannot be logged out";
     }
 
-    echo "$uid successfully logged out";
+    echo "$uid successfully logged out<br>";
     echo "Redirecting to homepage...";
     header("refresh:3; URL=./index.php");
     ?>

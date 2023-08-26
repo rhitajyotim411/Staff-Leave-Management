@@ -19,7 +19,7 @@ if (!isset($_SESSION['UID'])) {
 }
 if ($_SESSION['type'] != 'admin') {
     echo '<h2 style="color: red">Access Denied!!</h2>';
-    echo 'Not an admin, redirecting to dashboard...';
+    echo 'Not an admin, Redirecting to dashboard...';
     die(header("refresh:3; URL=../staff/dashboard.php"));
 }
 ?>
