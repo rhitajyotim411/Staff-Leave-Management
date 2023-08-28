@@ -26,7 +26,8 @@ session_start();
         // destroy the session
         session_destroy();
     } catch (\Throwable $th) {
-        echo "$UID cannot be logged out";
+        echo "$uid cannot be logged out";
+        die("<br><a href=\"./{$_SESSION['type']}/dashboard.php\">Dashboard</a>");
     }
 
     echo "$uid successfully logged out<br>";

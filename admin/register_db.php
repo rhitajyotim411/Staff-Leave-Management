@@ -20,14 +20,13 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($stmt->rowCount() > 0) {
     echo "{$uid} already registered<br>";
-    echo "Redirecting to login...";
-    header("refresh:3; URL=./login.php");
+    echo '<br>';
+    echo "<a href='./login.php'>Login here</a> ";
+    echo "or <a href='./register.php'>register again</a> with different ID";
 } else {
     try {
         $sql = "INSERT INTO {$tbname} VALUES(:uid, :name, :passwd)";
-
         $stmt = $conn->prepare($sql);
-
         $stmt->execute([
             ':uid' => $uid,
             ':name' => $name,
@@ -35,6 +34,7 @@ if ($stmt->rowCount() > 0) {
         ]);
     } catch (PDOException $e) {
         echo "Insertion failed: " . $e->getMessage();
+        die("<br><a href='../index.php'>Homepage</a>");
     }
 
     $_SESSION['UID'] = $uid;

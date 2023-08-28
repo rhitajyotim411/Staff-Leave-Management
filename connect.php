@@ -19,4 +19,5 @@ try {
     // echo "Connection Successful.";
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
+    die("<br><a href='./index.php'>Homepage</a>");
 }
