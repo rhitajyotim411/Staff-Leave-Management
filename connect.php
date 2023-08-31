@@ -6,6 +6,8 @@ if (realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
     die(header("refresh:3; URL=./index.php"));
 }
 
+date_default_timezone_set("Asia/Kolkata");
+
 $host = "localhost"; /* Host name */
 $user = "R35"; /* User */
 $password = "R35"; /* Password */

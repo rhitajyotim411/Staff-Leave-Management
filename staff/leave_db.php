@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 
 require_once '../connect.php';
 
+$tbleave = "staff_leave";
 $tbname = "leave_record";
 $type = $_POST['leave_type'];
 $from = $_POST['from'];
@@ -26,33 +27,70 @@ function days($from, $to)
     $to->modify('+1 day');
     $interval = new DateInterval('P1D');
     $periods = new DatePeriod($from, $interval, $to);
+    $flag = false;
 
     $days = 0;
     foreach ($periods as $period) {
-        if (!in_array($period->format('N'), $workingDays)) continue;
-        if (in_array($period->format('*-m-d'), $holidayDays)) continue;
+        if (!in_array($period->format('N'), $workingDays))
+            continue;
+        if (in_array($period->format('*-m-d'), $holidayDays))
+            continue;
+
+        if ($period->format('N') == 5)
+            $flag = true;
+        else if ($period->format('N') == 1 and $flag) {
+            $flag = false;
+            $days++;
+        }
         $days++;
     }
     return $days;
 }
 
+$lv_types = ['EL', 'CL', 'SL'];
+
 try {
-    echo days($from, $to).'<br>';
-    $sql = "INSERT INTO {$tbname} VALUES(:sn, :type, :from, :to, :uid)";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([
-        ':sn' => null,
-        ':type' => $type,
-        ':from' => $from,
-        ':to' => $to,
-        ':uid' => $uid
-    ]);
+    $t = in_array($type, $lv_types);
+    if ($t) {
+        global $data;
+        $stmt = $conn->query("SELECT $type from $tbleave where uid='$uid'");
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    $d = days($from, $to);
+    if ($t and $data[$type] < $d) {
+        echo "Not enough {$type}s available<br>";
+        echo "Available {$type}s: $data[$type]<br>";
+        echo "Requested {$type}s: $d";
+    } else {
+        // enter leave record
+        $sql = "INSERT INTO $tbname VALUES(:sn, :type, :from, :to, :uid)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ':sn' => null,
+            ':type' => $type,
+            ':from' => $from,
+            ':to' => $to,
+            ':uid' => $uid
+        ]);
+
+        // update leave
+        if ($t) {
+            $sql = "UPDATE $tbleave SET $type=:days WHERE UID=:uid";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([
+                ':days' => $data[$type] - $d,
+                ':uid' => $uid
+            ]);
+        }
+
+        echo "Leave request successfully registered<br>";
+        echo "Requested {$type}s: $d<br>";
+        if ($t)
+            echo "Remaining {$type}s: " . ($data[$type] - $d);
+    }
 } catch (PDOException $e) {
     echo "Insertion failed: " . $e->getMessage();
     die("<br><a href='./dashboard.php'>Dashboard</a>");
 }
 
-echo "Leave request successfully registered<br>";
-echo "Redirecting to dashboard...";
-// header("refresh:3; URL=./dashboard.php");
 echo "<br><a href='./dashboard.php'>Dashboard</a>";
