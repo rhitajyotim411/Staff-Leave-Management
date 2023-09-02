@@ -35,18 +35,19 @@ if ($_SESSION['type'] != 'staff') {
       <option value="OP">Outdoor duty (OP)</option>
       <option value="LWP">Leave Without Pay (LWP)</option>
     </select>
-    <br />
+    <br><br>
 
     <!--Duration-->
     <label for="from">From: </label>
     <input type="date" name="from" />
-    <br />
+    <br><br>
     <label for="to">To: </label>
     <input type="date" name="to" />
-    <br />
+    <br><br>
 
     <input type="submit" />
-  </form>
+  </form><br>
+  <a href='./dashboard.php'>Dashboard</a>
 </body>
 
 </html>

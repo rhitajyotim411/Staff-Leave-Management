@@ -25,7 +25,11 @@ if ($_SESSION['type'] != 'staff') {
 ?>
 
 <body>
-    <p>Dashboard: - </p>
+    <h2>Welcome,
+        <?php echo $_SESSION['UID'] ?>
+    </h2>
+
+    <h3>Dashboard: - </h3>
     <ul>
         <li>
             <a href="./leave.php">Apply for leave</a>
