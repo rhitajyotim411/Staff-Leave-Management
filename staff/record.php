@@ -40,6 +40,10 @@ $uid = $_SESSION['UID'];
 $fields = "UID, Type, `From`, `To`, Days, Status";
 $query = "SELECT $fields FROM $tbname WHERE uid='$uid' ORDER BY `From`";
 $stmt = $conn->query($query);
+if ($stmt->rowCount() < 1) {
+    echo "No leave record found<br>";
+    die("<a href='./dashboard.php'>Dashboard</a>");
+}
 ?>
 
 <body>
