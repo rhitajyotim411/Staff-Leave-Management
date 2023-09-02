@@ -31,6 +31,9 @@ if ($_SESSION['type'] != 'staff') {
             <a href="./leave.php">Apply for leave</a>
         </li>
         <li>
+            <a href="./record.php">Get leave record</a>
+        </li>
+        <li>
             <a href="../logout.php">Logout</a>
         </li>
     </ul>
