@@ -18,23 +18,16 @@ if (isset($_SESSION['UID'])) {
     die(header("refresh:3; URL=../{$_SESSION['type']}/dashboard.php"));
 }
 
-$url = $_SERVER['PHP_SELF'];
 $vrf = '';
-$btn = 'Verify';
-$cpch = '<img id="captch" src="../captcha.php">&emsp;
-<input type="submit" value="Refresh"><br><br>
-<label for="captcha" name="captcha">Captcha: </label>
-<input type="text" name="captcha" autocomplete="off" />&emsp;';
 
 // If user has given a captcha!
 if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != '')
-
     // If the captcha is valid
     if ($_POST['captcha'] == $_SESSION['captcha']) {
-        $vrf = '<span style="color:green">CAPTCHA SUCCESSFULLY VERIFIED!!</span>';
-        $btn = 'Register';
-        $cpch = '';
-        $url = './register_db.php';
+        echo '<span style="color:green">CAPTCHA SUCCESSFULLY VERIFIED!!</span><br>';
+        echo "Registering...";
+        $_SESSION["post"] = $_POST;
+        die(header("refresh:1; URL=./register_db.php"));
     } else {
         $vrf = '<span style="color:red">CAPTCHA FAILED!!!</span>';
     }
@@ -50,16 +43,19 @@ if (isset($_POST['passwd']))
 ?>
 
 <body>
-    <form action="<?php echo htmlspecialchars($url); ?>" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
         <label for="uid">Admin ID: </label>
         <input name="uid" type="text" length="10" maxlength="10" value="<?php echo $uid ?>"><br><br>
         <label for="name">Full Name: </label>
         <input name="name" type="text" length="100" maxlength="255" value="<?php echo $name ?>"><br><br>
         <label for="passwd">Password: </label>
         <input name="passwd" type="password" length="100" maxlength="255" value="<?php echo $passwd ?>"><br><br>
-        <?php echo $cpch; ?>
+        <img id="captch" src="../captcha.php">&emsp;
+        <input type="submit" value="Refresh"><br><br>
+        <label for="captcha" name="captcha">Captcha: </label>
+        <input type="text" name="captcha" autocomplete="off" />&emsp;
         <?php echo $vrf; ?><br><br>
-        <input type="submit" name="submit" value="<?php echo $btn; ?>">
+        <input type="submit" name="submit" value="Verify">
     </form>
 </body>
 
