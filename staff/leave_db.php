@@ -49,6 +49,10 @@ function days($from, $to)
 
 $lv_types = ['EL', 'CL', 'SL'];
 
+echo "<h2>Leave request summary</h2>";
+echo "From: $from<br>";
+echo "To: $to<br>";
+
 try {
     $t = in_array($type, $lv_types);
     if ($t) {
@@ -58,19 +62,21 @@ try {
     }
     $d = days($from, $to);
     if ($t and $data[$type] < $d) {
-        echo "Not enough {$type}s available<br>";
+        echo "Requested {$type}s: $d<br>";
         echo "Available {$type}s: $data[$type]<br>";
-        echo "Requested {$type}s: $d";
+        echo "Not enough {$type}s available<br>";
+        echo "Leave request failed<br>";
     } else {
         // enter leave record
-        $sql = "INSERT INTO $tbname VALUES(:sn, :type, :from, :to, :uid)";
+        $sql = "INSERT INTO $tbname (UID, Type, `From`, `To`, Days) ";
+        $sql .= "VALUES(:uid, :type, :from, :to, :days)";
         $stmt = $conn->prepare($sql);
         $stmt->execute([
-            ':sn' => null,
+            ':uid' => $uid,
             ':type' => $type,
             ':from' => $from,
             ':to' => $to,
-            ':uid' => $uid
+            ':days' => $d
         ]);
 
         // update leave
@@ -83,10 +89,10 @@ try {
             ]);
         }
 
-        echo "Leave request successfully registered<br>";
         echo "Requested {$type}s: $d<br>";
         if ($t)
-            echo "Remaining {$type}s: " . ($data[$type] - $d);
+            echo "Remaining {$type}s: " . ($data[$type] - $d) . "<br>";
+        echo "Leave request successfully registered<br>";
     }
 } catch (PDOException $e) {
     echo "Insertion failed: " . $e->getMessage();
