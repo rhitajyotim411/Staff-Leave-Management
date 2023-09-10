@@ -1,177 +1,139 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
+-- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for Win64 (AMD64)
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 10, 2023 at 06:14 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: r35
+-- ------------------------------------------------------
+-- Server version	10.4.28-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `r35`
---
-
--- --------------------------------------------------------
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `admin_login`
 --
 
+DROP TABLE IF EXISTS `admin_login`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin_login` (
   `UID` varchar(10) NOT NULL,
   `Name` varchar(255) NOT NULL,
-  `Passwd` varchar(255) NOT NULL
+  `Passwd` varchar(255) NOT NULL,
+  PRIMARY KEY (`UID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `admin_login`
 --
 
-INSERT INTO `admin_login` (`UID`, `Name`, `Passwd`) VALUES
-('admin1', 'Dipti Gupta', '$2y$10$lBMwO7FRzF.5rozdKellfuYksf2qFpawt6ctxrNsVdBsK4wD3sgza'),
-('admin2', 'Kashi Choudhary', '$2y$10$ySzr3.Y9N5KBNF0Fku4xre2CXCoXTu/NgJgQKzRN1lrrYXvtiynCi'),
-('admin3', 'Aryan Gupta', '$2y$10$r/7aJnapi/RQKbHmv8d9Z.6k6BcSMWEtGcVyLUvu.oXucG335AWj2'),
-('admin4', 'Jayashri Mishra', '$2y$10$AKusfp3NgSGSTq/Ha3EN0uV0AI5LnlPDCkT/CacwPdnlWENid783y');
-
--- --------------------------------------------------------
+LOCK TABLES `admin_login` WRITE;
+/*!40000 ALTER TABLE `admin_login` DISABLE KEYS */;
+INSERT INTO `admin_login` VALUES ('admin1','Dipti Gupta','$2y$10$lBMwO7FRzF.5rozdKellfuYksf2qFpawt6ctxrNsVdBsK4wD3sgza'),('admin2','Kashi Choudhary','$2y$10$ySzr3.Y9N5KBNF0Fku4xre2CXCoXTu/NgJgQKzRN1lrrYXvtiynCi'),('admin3','Aryan Gupta','$2y$10$r/7aJnapi/RQKbHmv8d9Z.6k6BcSMWEtGcVyLUvu.oXucG335AWj2'),('admin4','Jayashri Mishra','$2y$10$AKusfp3NgSGSTq/Ha3EN0uV0AI5LnlPDCkT/CacwPdnlWENid783y');
+/*!40000 ALTER TABLE `admin_login` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `leave_record`
 --
 
+DROP TABLE IF EXISTS `leave_record`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `leave_record` (
-  `SN` int(50) NOT NULL,
+  `SN` int(50) NOT NULL AUTO_INCREMENT,
   `UID` varchar(10) NOT NULL,
   `Type` varchar(5) NOT NULL,
   `From` date NOT NULL,
   `To` date NOT NULL,
   `Days` int(3) NOT NULL,
   `Status` varchar(15) NOT NULL DEFAULT 'Pending',
-  `Approved by` varchar(10) DEFAULT NULL
-) ;
+  `Approved by` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`SN`),
+  KEY `staff_rec_fk` (`UID`),
+  KEY `admin_app_fk` (`Approved by`),
+  CONSTRAINT `admin_app_fk` FOREIGN KEY (`Approved by`) REFERENCES `admin_login` (`UID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `staff_rec_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `status_ck` CHECK (`Status` in ('Pending','Approved','Denied'))
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `leave_record`
 --
 
-INSERT INTO `leave_record` (`SN`, `UID`, `Type`, `From`, `To`, `Days`, `Status`, `Approved by`) VALUES
-(2, 'staff3', 'LWP', '2023-09-21', '2023-09-22', 2, 'Approved', NULL),
-(4, 'staff2', 'OP', '2023-09-13', '2023-09-15', 3, 'Pending', NULL),
-(6, 'staff1', 'SL', '2023-09-15', '2023-09-18', 3, 'Pending', NULL);
-
--- --------------------------------------------------------
+LOCK TABLES `leave_record` WRITE;
+/*!40000 ALTER TABLE `leave_record` DISABLE KEYS */;
+INSERT INTO `leave_record` VALUES (2,'staff3','LWP','2023-09-21','2023-09-22',2,'Approved',NULL),(4,'staff2','OP','2023-09-13','2023-09-15',3,'Pending',NULL),(6,'staff1','SL','2023-09-15','2023-09-18',3,'Pending',NULL);
+/*!40000 ALTER TABLE `leave_record` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `staff_leave`
 --
 
+DROP TABLE IF EXISTS `staff_leave`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `staff_leave` (
   `UID` varchar(10) NOT NULL,
   `EL` int(3) NOT NULL,
   `CL` int(2) NOT NULL,
-  `SL` int(4) NOT NULL
+  `SL` int(4) NOT NULL,
+  PRIMARY KEY (`UID`),
+  CONSTRAINT `staff_id_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `staff_leave`
 --
 
-INSERT INTO `staff_leave` (`UID`, `EL`, `CL`, `SL`) VALUES
-('staff1', 5, 12, 27),
-('staff2', 5, 12, 30),
-('staff3', 5, 12, 30),
-('staff4', 5, 12, 30);
-
--- --------------------------------------------------------
+LOCK TABLES `staff_leave` WRITE;
+/*!40000 ALTER TABLE `staff_leave` DISABLE KEYS */;
+INSERT INTO `staff_leave` VALUES ('staff1',5,12,27),('staff2',5,12,30),('staff3',5,12,30),('staff4',5,12,30);
+/*!40000 ALTER TABLE `staff_leave` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `staff_login`
 --
 
+DROP TABLE IF EXISTS `staff_login`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `staff_login` (
   `UID` varchar(10) NOT NULL,
   `Name` varchar(255) NOT NULL,
-  `Passwd` varchar(255) NOT NULL
+  `Passwd` varchar(255) NOT NULL,
+  PRIMARY KEY (`UID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `staff_login`
 --
 
-INSERT INTO `staff_login` (`UID`, `Name`, `Passwd`) VALUES
-('staff1', 'Pratik Das', '$2y$10$oVeaN2Ek6WugGp4oyOKcmOALQl0U57Xe/b4A5LNhIZxYiwEHPZP3u'),
-('staff2', 'Manjusha Choudhary', '$2y$10$Ca28Vet489B8a6SOXn5fuel/SHynVQ4fiAjiSHlz1GFHsIkpHBV56'),
-('staff3', 'Samir Das', '$2y$10$O.f1qxneUeoOrglsyDb96ulAaShyKTexupaO8eiaImhHzb3zr/HQS'),
-('staff4', 'Noyon Das', '$2y$10$KGEmNHwxdF.SxIZ9LMcDCe9NmzJsLIdxMcl0OM8xdrHd4LQC702rG');
+LOCK TABLES `staff_login` WRITE;
+/*!40000 ALTER TABLE `staff_login` DISABLE KEYS */;
+INSERT INTO `staff_login` VALUES ('staff1','Pratik Das','$2y$10$oVeaN2Ek6WugGp4oyOKcmOALQl0U57Xe/b4A5LNhIZxYiwEHPZP3u'),('staff2','Manjusha Choudhary','$2y$10$Ca28Vet489B8a6SOXn5fuel/SHynVQ4fiAjiSHlz1GFHsIkpHBV56'),('staff3','Samir Das','$2y$10$O.f1qxneUeoOrglsyDb96ulAaShyKTexupaO8eiaImhHzb3zr/HQS'),('staff4','Noyon Das','$2y$10$KGEmNHwxdF.SxIZ9LMcDCe9NmzJsLIdxMcl0OM8xdrHd4LQC702rG');
+/*!40000 ALTER TABLE `staff_login` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `admin_login`
---
-ALTER TABLE `admin_login`
-  ADD PRIMARY KEY (`UID`);
-
---
--- Indexes for table `leave_record`
---
-ALTER TABLE `leave_record`
-  ADD PRIMARY KEY (`SN`),
-  ADD KEY `staff_rec_fk` (`UID`),
-  ADD KEY `admin_app_fk` (`Approved by`);
-
---
--- Indexes for table `staff_leave`
---
-ALTER TABLE `staff_leave`
-  ADD PRIMARY KEY (`UID`);
-
---
--- Indexes for table `staff_login`
---
-ALTER TABLE `staff_login`
-  ADD PRIMARY KEY (`UID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `leave_record`
---
-ALTER TABLE `leave_record`
-  MODIFY `SN` int(50) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `leave_record`
---
-ALTER TABLE `leave_record`
-  ADD CONSTRAINT `admin_app_fk` FOREIGN KEY (`Approved by`) REFERENCES `admin_login` (`UID`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `staff_rec_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `status_ck` CHECK (`Status` IN ('Pending', 'Approved', 'Denied'));
---
--- Constraints for table `staff_leave`
---
-ALTER TABLE `staff_leave`
-  ADD CONSTRAINT `staff_id_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-09-10 22:27:50
