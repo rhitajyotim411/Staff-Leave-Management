@@ -62,7 +62,7 @@ CREATE TABLE `leave_record` (
   CONSTRAINT `admin_app_fk` FOREIGN KEY (`Admin`) REFERENCES `admin_login` (`UID`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `staff_rec_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `status_ck` CHECK (`Status` in ('Pending','Approved','Denied'))
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `leave_record` (
 
 LOCK TABLES `leave_record` WRITE;
 /*!40000 ALTER TABLE `leave_record` DISABLE KEYS */;
-INSERT INTO `leave_record` VALUES (2,'staff3','LWP','2023-09-21','2023-09-22',2,'Approved',NULL),(4,'staff2','OP','2023-09-13','2023-09-15',3,'Pending',NULL),(6,'staff1','SL','2023-09-15','2023-09-18',3,'Pending',NULL);
+INSERT INTO `leave_record` VALUES (2,'staff3','LWP','2023-09-21','2023-09-22',2,'Approved','admin1'),(4,'staff2','OP','2023-09-13','2023-09-15',3,'Pending',NULL),(6,'staff1','SL','2023-09-15','2023-09-18',3,'Pending',NULL),(8,'staff4','CL','2023-10-03','2023-10-06',4,'Pending',NULL);
 /*!40000 ALTER TABLE `leave_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `staff_leave` (
 
 LOCK TABLES `staff_leave` WRITE;
 /*!40000 ALTER TABLE `staff_leave` DISABLE KEYS */;
-INSERT INTO `staff_leave` VALUES ('staff1',5,12,27),('staff2',5,12,30),('staff3',5,12,30),('staff4',5,12,30);
+INSERT INTO `staff_leave` VALUES ('staff1',5,12,27),('staff2',5,12,30),('staff3',5,12,30),('staff4',5,8,30);
 /*!40000 ALTER TABLE `staff_leave` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-10 23:58:21
+-- Dump completed on 2023-09-11  0:25:25
