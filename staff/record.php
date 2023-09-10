@@ -38,7 +38,7 @@ require_once '../connect.php';
 $tbleave = "staff_leave";
 $tbname = "leave_record";
 $uid = $_SESSION['UID'];
-$fields = "UID, Type, `From`, `To`, Days, Status";
+$fields = "SN, Type, `From`, `To`, Days, Status";
 
 $stmt = $conn->query("SELECT * FROM $tbleave WHERE uid='$uid'");
 $data = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -76,22 +76,29 @@ $stmt = $conn->query($query);
 
     <table>
         <tr>
-            <th>UID</th>
             <th>Type</th>
             <th>From</th>
             <th>To</th>
             <th>Days</th>
             <th>Status</th>
+            <th>Action</th>
         </tr>
         <?php
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo "<tr>";
-            echo "<td>{$row['UID']}</td>";
             echo "<td>{$row['Type']}</td>";
             echo "<td>{$row['From']}</td>";
             echo "<td>{$row['To']}</td>";
             echo "<td style=\"text-align: center\">{$row['Days']}</td>";
             echo "<td>{$row['Status']}</td>";
+            echo "<td>";
+            if ($row['Status'] === 'Pending') {
+                echo "<form action=\"./withdraw.php\" method=\"post\">";
+                echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
+                echo "<input type=\"submit\" name=\"submit\" value=\"Withdraw\">";
+                echo "</form>";
+            }
+            echo "</td>";
             echo "</tr>";
         }
         ?>
