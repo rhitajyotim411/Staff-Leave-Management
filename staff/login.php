@@ -24,10 +24,8 @@ $vrf = '';
 if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != '')
     // If the captcha is valid
     if ($_POST['captcha'] == $_SESSION['captcha']) {
-        echo '<span style="color:green">CAPTCHA SUCCESSFULLY VERIFIED!!</span><br>';
-        echo "Logging in...";
         $_SESSION["post"] = $_POST;
-        die(header("refresh:1; URL=./login_db.php"));
+        die(header("Location: ./login_db.php"));
     } else {
         $vrf = '<span style="color:red">CAPTCHA FAILED!!!</span>';
     }
