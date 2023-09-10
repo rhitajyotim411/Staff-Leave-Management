@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2023 at 09:02 PM
+-- Generation Time: Sep 10, 2023 at 06:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -58,17 +58,16 @@ CREATE TABLE `leave_record` (
   `Days` int(3) NOT NULL,
   `Status` varchar(15) NOT NULL DEFAULT 'Pending',
   `Approved by` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ;
 
 --
 -- Dumping data for table `leave_record`
 --
 
 INSERT INTO `leave_record` (`SN`, `UID`, `Type`, `From`, `To`, `Days`, `Status`, `Approved by`) VALUES
-(1, 'staff1', 'SL', '2023-09-06', '2023-09-13', 7, 'Pending', NULL),
-(2, 'staff3', 'LWP', '2023-09-21', '2023-09-22', 2, 'Pending', NULL),
-(3, 'staff3', 'CL', '2023-09-08', '2023-09-12', 4, 'Pending', NULL),
-(4, 'staff2', 'OP', '2023-09-13', '2023-09-15', 3, 'Pending', NULL);
+(2, 'staff3', 'LWP', '2023-09-21', '2023-09-22', 2, 'Approved', NULL),
+(4, 'staff2', 'OP', '2023-09-13', '2023-09-15', 3, 'Pending', NULL),
+(6, 'staff1', 'SL', '2023-09-15', '2023-09-18', 3, 'Pending', NULL);
 
 -- --------------------------------------------------------
 
@@ -88,9 +87,9 @@ CREATE TABLE `staff_leave` (
 --
 
 INSERT INTO `staff_leave` (`UID`, `EL`, `CL`, `SL`) VALUES
-('staff1', 5, 12, 23),
+('staff1', 5, 12, 27),
 ('staff2', 5, 12, 30),
-('staff3', 5, 8, 30),
+('staff3', 5, 12, 30),
 ('staff4', 5, 12, 30);
 
 -- --------------------------------------------------------
@@ -153,7 +152,7 @@ ALTER TABLE `staff_login`
 -- AUTO_INCREMENT for table `leave_record`
 --
 ALTER TABLE `leave_record`
-  MODIFY `SN` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `SN` int(50) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
