@@ -55,11 +55,11 @@ CREATE TABLE `leave_record` (
   `To` date NOT NULL,
   `Days` int(3) NOT NULL,
   `Status` varchar(15) NOT NULL DEFAULT 'Pending',
-  `Approved by` varchar(10) DEFAULT NULL,
+  `Admin` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`SN`),
   KEY `staff_rec_fk` (`UID`),
-  KEY `admin_app_fk` (`Approved by`),
-  CONSTRAINT `admin_app_fk` FOREIGN KEY (`Approved by`) REFERENCES `admin_login` (`UID`) ON DELETE SET NULL ON UPDATE CASCADE,
+  KEY `admin_app_fk` (`Admin`),
+  CONSTRAINT `admin_app_fk` FOREIGN KEY (`Admin`) REFERENCES `admin_login` (`UID`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `staff_rec_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `status_ck` CHECK (`Status` in ('Pending','Approved','Denied'))
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -136,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-10 22:27:50
+-- Dump completed on 2023-09-10 23:58:21
