@@ -163,8 +163,8 @@ ALTER TABLE `leave_record`
 --
 ALTER TABLE `leave_record`
   ADD CONSTRAINT `admin_app_fk` FOREIGN KEY (`Approved by`) REFERENCES `admin_login` (`UID`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `staff_rec_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+  ADD CONSTRAINT `staff_rec_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `status_ck` CHECK (`Status` IN ('Pending', 'Approved', 'Denied'));
 --
 -- Constraints for table `staff_leave`
 --
