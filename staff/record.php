@@ -50,7 +50,7 @@ $stmt = $conn->query($query);
 <body>
     <h2>Leave Record</h2>
 
-    <h3>Leave available: -</h3>
+    <h3>Leaves available: -</h3>
     <table>
         <tr>
             <td>Earned leave (EL):
@@ -65,7 +65,7 @@ $stmt = $conn->query($query);
         </tr>
     </table>
 
-    <h3>Leave recorded: -</h3>
+    <h3>Leaves recorded: -</h3>
 
     <?php
     if ($stmt->rowCount() < 1) {

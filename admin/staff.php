@@ -43,6 +43,11 @@ if ($_SESSION['type'] != 'admin') {
 
     <?php
     if (isset($_POST['staff'])) {
+        if ($_POST['staff'] == "") {
+            echo "<p>Enter staff UID to fetch leave record</p>";
+            die("<a href='./dashboard.php'>Dashboard</a>");
+        }
+
         require_once '../connect.php';
         $tbleave = "staff_leave";
         $tbrec = "leave_record";
@@ -58,10 +63,12 @@ if ($_SESSION['type'] != 'admin') {
 
         $query = "SELECT $fields FROM $tbrec WHERE uid='$s_uid' ORDER BY `From`";
         $stmt = $conn->query($query);
-    ?>
-        <h2><?php echo $s_uid ?> Leave Record</h2>
+        ?>
+        <h2>Leave Record of
+            <?php echo $s_uid ?>
+        </h2>
 
-        <h3>Leave available: -</h3>
+        <h3>Leaves available: -</h3>
         <table>
             <tr>
                 <td>Earned leave (EL):
@@ -76,7 +83,7 @@ if ($_SESSION['type'] != 'admin') {
             </tr>
         </table>
 
-        <h3>Leave recorded: -</h3>
+        <h3>Leaves recorded: -</h3>
 
         <?php
         if ($stmt->rowCount() < 1) {
@@ -106,7 +113,7 @@ if ($_SESSION['type'] != 'admin') {
             }
             ?>
         </table>
-    <?php
+        <?php
     }
     ?>
     <br>

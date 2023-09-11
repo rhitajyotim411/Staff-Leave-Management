@@ -39,19 +39,22 @@ require_once '../connect.php';
 $tbname = "staff_leave";
 
 $stmt = $conn->query("SELECT * FROM $tbname");
+
+if ($stmt->rowCount() < 1) {
+    echo "<p>No staffs found<br></p>";
+    die("<a href='./dashboard.php'>Dashboard</a>");
+}
 ?>
 
 <body>
     <h2>All Staff leaves</h2>
 
-    <h3>Leave recorded: -</h3>
-
     <table>
         <tr>
             <th>UID</th>
-            <th>Earned leave (EL)</th>
-            <th>Casual leave (CL)</th>
-            <th>Sick leave (SL)</th>
+            <th>Earned leave<br>(EL)</th>
+            <th>Casual leave<br>(CL)</th>
+            <th>Sick leave<br>(SL)</th>
             <th>Action</th>
         </tr>
         <?php
