@@ -32,7 +32,13 @@ if ($_SESSION['type'] != 'admin') {
     <h3>Dashboard: - </h3>
     <ul>
         <li>
-            <a href='./staff.php'>Get staff leave record</a>
+            <a href='./leave.php'>All staff leaves</a>
+        </li>
+        <li>
+            <a href='./record.php'>All leaves record</a>
+        </li>
+        <li>
+            <a href='./staff.php'>Get a staff leave record</a>
         </li>
         <li>
             <a href="../logout.php">Logout</a>
