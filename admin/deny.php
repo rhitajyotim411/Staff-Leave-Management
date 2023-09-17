@@ -36,4 +36,13 @@ $stmt->execute([
     ':uid' => $_SESSION['UID'],
     ':sn' => $sn
 ]);
-die(header("Location: {$_SERVER['HTTP_REFERER']}"));
+
+$x = $_SERVER['HTTP_REFERER'];
+$pg = explode('/', $x);
+$pg = end($pg);
+
+if ($pg === 'staff.php') {
+    $_SESSION["staff_uid"] = $data['UID'];
+}
+
+die(header("Location: $x"));

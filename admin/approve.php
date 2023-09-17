@@ -21,4 +21,14 @@ $stmt->execute([
     ':sn' => $sn
 ]);
 
-die(header("Location: {$_SERVER['HTTP_REFERER']}"));
+$x = $_SERVER['HTTP_REFERER'];
+$pg = explode('/', $x);
+$pg = end($pg);
+
+if ($pg === 'staff.php') {
+    $stmt = $conn->query("SELECT UID FROM $tbname WHERE SN='$sn'");
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    $_SESSION["staff_uid"] = $data['UID'];
+}
+
+die(header("Location: $x"));

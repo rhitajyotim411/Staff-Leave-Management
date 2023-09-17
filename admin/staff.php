@@ -32,6 +32,11 @@ if ($_SESSION['type'] != 'admin') {
     echo 'Not an admin, Redirecting to dashboard...';
     die(header("refresh:3; URL=../staff/dashboard.php"));
 }
+
+if (isset($_SESSION["staff_uid"])) {
+    $_POST['staff'] = $_SESSION["staff_uid"];
+    unset($_SESSION["staff_uid"]);
+}
 ?>
 
 <body>
@@ -52,7 +57,7 @@ if ($_SESSION['type'] != 'admin') {
         $tbleave = "staff_leave";
         $tbrec = "leave_record";
         $s_uid = $_POST['staff'];
-        $fields = "Type, `From`, `To`, Days, Status";
+        $fields = "SN, Type, `From`, `To`, Days, Status";
 
         $stmt = $conn->query("SELECT * FROM $tbleave WHERE uid='$s_uid'");
         if ($stmt->rowCount() < 1) {
@@ -99,7 +104,7 @@ if ($_SESSION['type'] != 'admin') {
                 <th>To</th>
                 <th>Days</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th colspan=2>Actions</th>
             </tr>
             <?php
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -109,6 +114,22 @@ if ($_SESSION['type'] != 'admin') {
                 echo "<td>{$row['To']}</td>";
                 echo "<td style=\"text-align: center\">{$row['Days']}</td>";
                 echo "<td>{$row['Status']}</td>";
+                echo "<td>";
+                if ($row['Status'] === 'Pending') {
+                    echo "<form action=\"./approve.php\" method=\"post\">";
+                    echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
+                    echo "<input type=\"submit\" name=\"submit\" value=\"Approve\">";
+                    echo "</form>";
+                }
+                echo "</td>";
+                echo "<td>";
+                if ($row['Status'] === 'Pending') {
+                    echo "<form action=\"./deny.php\" method=\"post\">";
+                    echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
+                    echo "<input type=\"submit\" name=\"submit\" value=\"Deny\">";
+                    echo "</form>";
+                }
+                echo "</td>";
                 echo "</tr>";
             }
             ?>
