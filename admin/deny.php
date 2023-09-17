@@ -11,14 +11,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
 require_once '../connect.php';
 
 $sn = $_POST['lv_sn'];
+$tbleave = "staff_leave";
 $tbname = "leave_record";
+$lv_types = ['EL', 'CL', 'SL'];
 
+$stmt = $conn->query("SELECT UID, Type, Days FROM $tbname WHERE SN='$sn'");
+$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// return back days
+if (in_array($data['Type'], $lv_types)) {
+    $sql = "UPDATE $tbleave SET {$data['Type']}={$data['Type']}+:days WHERE UID=:uid";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        ':days' => $data['Days'],
+        ':uid' => $data['UID']
+    ]);
+}
+
+// deny leave
 $sql = "UPDATE $tbname SET Status=:status, Admin=:uid WHERE SN=:sn";
 $stmt = $conn->prepare($sql);
 $stmt->execute([
-    ':status' => 'Approved',
+    ':status' => 'Denied',
     ':uid' => $_SESSION['UID'],
     ':sn' => $sn
 ]);
-
 die(header("Location: {$_SERVER['HTTP_REFERER']}"));
