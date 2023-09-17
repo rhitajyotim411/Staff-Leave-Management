@@ -37,7 +37,7 @@ require_once '../connect.php';
 
 $tbname = "leave_record";
 $uid = $_SESSION['UID'];
-$fields = "UID, Type, `From`, `To`, Days, Status";
+$fields = "SN, UID, Type, `From`, `To`, Days, Status";
 
 $query = "SELECT $fields FROM $tbname ORDER BY `From`";
 $stmt = $conn->query($query);
@@ -61,7 +61,7 @@ $stmt = $conn->query($query);
             <th>To</th>
             <th>Days</th>
             <th>Status</th>
-            <th>Action</th>
+            <th colspan=2>Actions</th>
         </tr>
         <?php
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -72,6 +72,22 @@ $stmt = $conn->query($query);
             echo "<td>{$row['To']}</td>";
             echo "<td style=\"text-align: center\">{$row['Days']}</td>";
             echo "<td>{$row['Status']}</td>";
+            echo "<td>";
+            if ($row['Status'] === 'Pending') {
+                echo "<form action=\"./approve.php\" method=\"post\">";
+                echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
+                echo "<input type=\"submit\" name=\"submit\" value=\"Approve\">";
+                echo "</form>";
+            }
+            echo "</td>";
+            echo "<td>";
+            if ($row['Status'] === 'Pending') {
+                echo "<form action=\"./deny.php\" method=\"post\">";
+                echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
+                echo "<input type=\"submit\" name=\"submit\" value=\"Deny\">";
+                echo "</form>";
+            }
+            echo "</td>";
             echo "</tr>";
         }
         ?>
