@@ -26,12 +26,12 @@ session_start();
 if (!isset($_SESSION['UID'])) {
     echo "Please login to continue<br>";
     echo "Redirecting to login page...";
-    die(header("refresh:3; URL=./login.php"));
+    die(header("refresh:2; URL=./login.php"));
 }
 if ($_SESSION['type'] != 'admin') {
     echo '<h2 style="color: red">Access Denied!!</h2>';
     echo 'Not an admin, Redirecting to dashboard...';
-    die(header("refresh:3; URL=../staff/dashboard.php"));
+    die(header("refresh:2; URL=../staff/dashboard.php"));
 }
 
 require_once '../connect.php';

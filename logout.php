@@ -16,7 +16,7 @@ session_start();
     if (!isset($_SESSION['UID'])) {
         echo "No user logged in<br>";
         echo "Redirecting...";
-        die(header("refresh:3; URL=./index.php"));
+        die(header("refresh:2; URL=./index.php"));
     }
 
     $uid = $_SESSION['UID'];
@@ -32,7 +32,7 @@ session_start();
 
     echo "$uid successfully logged out<br>";
     echo "Redirecting to homepage...";
-    header("refresh:3; URL=./index.php");
+    header("refresh:2; URL=./index.php");
     ?>
 </body>
 

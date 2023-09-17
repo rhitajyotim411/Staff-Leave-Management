@@ -25,12 +25,12 @@ session_start();
 if (!isset($_SESSION['UID'])) {
     echo "Please login to continue<br>";
     echo "Redirecting to login page...";
-    die(header("refresh:3; URL=./login.php"));
+    die(header("refresh:2; URL=./login.php"));
 }
 if ($_SESSION['type'] != 'admin') {
     echo '<h2 style="color: red">Access Denied!!</h2>';
     echo 'Not an admin, Redirecting to dashboard...';
-    die(header("refresh:3; URL=../staff/dashboard.php"));
+    die(header("refresh:2; URL=../staff/dashboard.php"));
 }
 
 if (isset($_SESSION["staff_uid"])) {
@@ -108,12 +108,19 @@ if (isset($_SESSION["staff_uid"])) {
             </tr>
             <?php
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                if ($row['Status'] === 'Approved')
+                    $clr = 'green';
+                elseif ($row['Status'] === 'Denied')
+                    $clr = 'red';
+                else
+                    $clr = 'black';
+
                 echo "<tr>";
                 echo "<td>{$row['Type']}</td>";
                 echo "<td>{$row['From']}</td>";
                 echo "<td>{$row['To']}</td>";
                 echo "<td style=\"text-align: center\">{$row['Days']}</td>";
-                echo "<td>{$row['Status']}</td>";
+                echo "<td style=\"color: $clr\">{$row['Status']}</td>";
                 echo "<td>";
                 if ($row['Status'] === 'Pending') {
                     echo "<form action=\"./approve.php\" method=\"post\">";
