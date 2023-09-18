@@ -53,6 +53,13 @@ echo "<h2>Leave request summary</h2>";
 echo "From: $from<br>";
 echo "To: $to<br>";
 
+$d = days($from, $to);
+
+if ($to < $from or $from < date("Y-m-d")) {
+    echo "Enter dates correctly";
+    die("<br><a href='./leave.php'>Re-apply for leave</a>");
+}
+
 try {
     $t = in_array($type, $lv_types);
     if ($t) {
@@ -60,7 +67,6 @@ try {
         $stmt = $conn->query("SELECT $type from $tbleave where uid='$uid'");
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    $d = days($from, $to);
     if ($t and $data[$type] < $d) {
         echo "Requested {$type}s: $d<br>";
         echo "Available {$type}s: $data[$type]<br>";
