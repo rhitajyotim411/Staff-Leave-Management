@@ -36,15 +36,30 @@ if ($_SESSION['type'] != 'admin') {
 require_once '../connect.php';
 
 $tbname = "leave_record";
-$uid = $_SESSION['UID'];
 $fields = "SN, UID, Type, `From`, `To`, Days, Status";
 
-$query = "SELECT $fields FROM $tbname ORDER BY `From`";
+if (isset($_POST['fltr_lv']) and $_POST['filter'] != 'All')
+    $query = "SELECT $fields FROM $tbname WHERE status='{$_POST['filter']}' ORDER BY `From`";
+else
+    $query = "SELECT $fields FROM $tbname ORDER BY `From`";
 $stmt = $conn->query($query);
 ?>
 
 <body>
     <h2>Leaves Record</h2>
+
+    <p>
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <label for="filter">Filter:</label>
+        <select name="filter">
+            <option value="All">All</option>
+            <option value="Approved">Approved</option>
+            <option value="Denied">Denied</option>
+            <option value="Pending">Pending</option>
+        </select>
+        <input type="submit" name="fltr_lv" value="Filter">
+    </form>
+    </p>
 
     <?php
     if ($stmt->rowCount() < 1) {

@@ -69,7 +69,7 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <body>
-    <h2>Staff:&nbsp;
+    <h2>Staff:
         <?php echo $id ?>
     </h2>
 

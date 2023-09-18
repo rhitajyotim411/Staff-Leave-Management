@@ -43,7 +43,10 @@ $fields = "SN, Type, `From`, `To`, Days, Status";
 $stmt = $conn->query("SELECT * FROM $tbleave WHERE uid='$uid'");
 $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$query = "SELECT $fields FROM $tbname WHERE uid='$uid' ORDER BY `From`";
+if (isset($_POST['fltr_lv']) and $_POST['filter'] != 'All')
+    $query = "SELECT $fields FROM $tbname WHERE uid='$uid' and status='{$_POST['filter']}' ORDER BY `From`";
+else
+    $query = "SELECT $fields FROM $tbname WHERE uid='$uid' ORDER BY `From`";
 $stmt = $conn->query($query);
 ?>
 
@@ -67,6 +70,19 @@ $stmt = $conn->query($query);
 
     <h3>Leaves recorded: -</h3>
 
+    <p>
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <label for="filter">Filter:</label>
+        <select name="filter">
+            <option value="All">All</option>
+            <option value="Approved">Approved</option>
+            <option value="Denied">Denied</option>
+            <option value="Pending">Pending</option>
+        </select>
+        <input type="submit" name="fltr_lv" value="Filter">
+    </form>
+    </p>
+
     <?php
     if ($stmt->rowCount() < 1) {
         echo "<p>No leave record found<br></p>";
@@ -83,6 +99,7 @@ $stmt = $conn->query($query);
             <th>Status</th>
             <th>Action</th>
         </tr>
+
         <?php
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if ($row['Status'] === 'Approved')
