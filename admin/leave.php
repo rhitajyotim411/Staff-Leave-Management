@@ -64,6 +64,12 @@ if ($stmt->rowCount() < 1) {
             echo "<td>{$row['EL']}</td>";
             echo "<td>{$row['CL']}</td>";
             echo "<td>{$row['SL']}</td>";
+            echo "<td>";
+            echo "<form action=\"./edit.php\" method=\"post\">";
+            echo "<input type=\"hidden\" name=\"stf_id\" value={$row['UID']}>";
+            echo "<input type=\"submit\" name=\"submit\" value=\"Edit\">";
+            echo "</form>";
+            echo "</td>";
             echo "</tr>";
         }
         ?>

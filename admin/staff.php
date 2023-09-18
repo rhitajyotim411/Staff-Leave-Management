@@ -85,6 +85,12 @@ if (isset($_SESSION["staff_uid"])) {
                 <td>Sick leave (SL):
                     <?php echo $data["SL"] ?>
                 </td>
+                <td>
+                    <form action="./edit.php" method="post">
+                        <input type="hidden" name="stf_id" value=<?php echo $s_uid ?>>
+                        <input type="submit" name="submit" value="Edit">
+                    </form>
+                </td>
             </tr>
         </table>
 
