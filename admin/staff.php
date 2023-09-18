@@ -67,9 +67,11 @@ if (isset($_SESSION["staff_uid"])) {
         }
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (isset($_POST['fltr_lv']) and $_POST['filter'] != 'All')
+        $fltr = "";
+        if (isset($_POST['fltr_lv']) and $_POST['filter'] != 'All') {
             $query = "SELECT $fields FROM $tbrec WHERE uid='$s_uid' and status='{$_POST['filter']}' ORDER BY `From`";
-        else
+            $fltr = $_POST['filter'];
+        } else
             $query = "SELECT $fields FROM $tbrec WHERE uid='$s_uid' ORDER BY `From`";
         $stmt = $conn->query($query);
         ?>
@@ -104,12 +106,16 @@ if (isset($_SESSION["staff_uid"])) {
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <label for="filter">Filter:</label>
             <select name="filter">
-                <option value="All">All</option>
-                <option value="Approved">Approved</option>
-                <option value="Denied">Denied</option>
-                <option value="Pending">Pending</option>
-            </select>
-            <input type="hidden" name="fltr_id" value="<?php echo $_POST['staff'] ?>">
+                <option value="All" <?php if ($fltr === "")
+                    echo "selected" ?>>All</option>
+                    <option value="Approved" <?php if ($fltr === "Approved")
+                    echo "selected" ?>>Approved</option>
+                    <option value="Denied" <?php if ($fltr === "Denied")
+                    echo "selected" ?>>Denied</option>
+                    <option value="Pending" <?php if ($fltr === "Pending")
+                    echo "selected" ?>>Pending</option>
+                </select>
+                <input type="hidden" name="fltr_id" value="<?php echo $_POST['staff'] ?>">
             <input type="submit" name="fltr_lv" value="Filter">
         </form>
         </p>
