@@ -46,15 +46,15 @@ if (isset($_POST['edit_save'])) {
         ':el' => $_POST['EL'],
         ':cl' => $_POST['CL'],
         ':sl' => $_POST['SL'],
-        ':uid' => $_SESSION["staff_uid"]
+        ':uid' => $_POST['edit_id']
     ]);
 
     $x = $_SESSION['referer'];
     $pg = explode('/', $x);
     $pg = end($pg);
 
-    if ($pg != 'staff.php') {
-        unset($_SESSION["staff_uid"]);
+    if ($pg === 'staff.php') {
+        $_SESSION["staff_uid"] = $_POST['edit_id'];
     }
 
     unset($_SESSION['referer']);
@@ -62,7 +62,6 @@ if (isset($_POST['edit_save'])) {
 }
 
 $id = $_POST['stf_id'];
-$_SESSION["staff_uid"] = $id;
 
 $stmt = $conn->query("SELECT * FROM $tbname WHERE uid='$id'");
 $data = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -74,6 +73,7 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
     </h2>
 
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <input type="hidden" name="edit_id" value="<?php echo $id ?>">
         <table>
             <tr>
                 <td>
