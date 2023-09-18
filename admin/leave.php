@@ -75,6 +75,10 @@ if ($stmt->rowCount() < 1) {
         ?>
     </table>
     <br>
+    <form action="./edit_all.php" method="post">
+        <input type="submit" name="submit" value="Edit All">
+    </form>
+    <br>
     <a href='./dashboard.php'>Dashboard</a>
 </body>
 

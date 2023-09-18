@@ -63,11 +63,16 @@ if (isset($_POST['edit_save'])) {
 
 $id = $_POST['stf_id'];
 $_SESSION["staff_uid"] = $id;
+
 $stmt = $conn->query("SELECT * FROM $tbname WHERE uid='$id'");
 $data = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <body>
+    <h2>Staff:&nbsp;
+        <?php echo $id ?>
+    </h2>
+
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
         <table>
             <tr>
