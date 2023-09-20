@@ -1,0 +1,19 @@
+body {
+  background-color: #7feddf;
+}
+
+.half {
+  background-color: #ebfffe;
+  border-radius: 5px;
+}
+
+.half:hover {
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+h1,
+h5,
+p {
+  color: #08314a !important;
+}
