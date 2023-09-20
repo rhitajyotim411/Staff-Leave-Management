@@ -16,7 +16,7 @@ session_start();
     if (!isset($_SESSION['UID'])) {
         echo "No user logged in<br>";
         echo "Redirecting...";
-        die(header("refresh:2; URL=./index.php"));
+        die(header("refresh:2; URL=../index.php"));
     }
 
     $uid = $_SESSION['UID'];
@@ -27,12 +27,12 @@ session_start();
         session_destroy();
     } catch (\Throwable $th) {
         echo "$uid cannot be logged out";
-        die("<br><a href=\"./{$_SESSION['type']}/dashboard.php\">Dashboard</a>");
+        die("<br><a href=\"../{$_SESSION['type']}/dashboard.php\">Dashboard</a>");
     }
 
     echo "$uid successfully logged out<br>";
     echo "Redirecting to homepage...";
-    header("refresh:2; URL=./index.php");
+    header("refresh:2; URL=../index.php");
     ?>
 </body>
 

@@ -8,7 +8,7 @@ if (!isset($_SESSION['post']) && $_SERVER['REQUEST_METHOD'] == 'GET' && realpath
     die(header("refresh:2; URL=../index.php"));
 }
 
-require_once '../connect.php';
+require_once '../util/connect.php';
 $post = $_SESSION['post'];
 unset($_SESSION['post']);
 
@@ -23,7 +23,7 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($stmt->rowCount() > 0) {
     echo "{$uid} already registered<br>";
     echo '<br>';
-    echo "<a href='./login.php'>Login here</a> ";
+    echo "<a href='../user/login.php'>Login here</a> ";
     echo "or <a href='./register.php'>register again</a> with different ID";
 } else {
     try {

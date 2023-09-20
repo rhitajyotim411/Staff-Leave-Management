@@ -8,7 +8,7 @@ if (!isset($_SESSION['post']) && $_SERVER['REQUEST_METHOD'] == 'GET' && realpath
     die(header("refresh:2; URL=../index.php"));
 }
 
-require_once '../connect.php';
+require_once '../util/connect.php';
 $post = $_SESSION['post'];
 unset($_SESSION['post']);
 
@@ -22,7 +22,7 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($stmt->rowCount() < 1) {
     echo "No such user present";
     echo '<br>';
-    echo "<a href='./register.php'>Register here</a> ";
+    echo "<a href='../user/register.php'>Register here</a> ";
     echo "or <a href='./login.php'>login again</a>";
 } else {
     if (password_verify($passwd, $data['passwd'])) {

@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     die(header("refresh:2; URL=../index.php"));
 }
 
-require_once '../connect.php';
+require_once '../util/connect.php';
 
 $sn = $_POST['lv_sn'];
 $tbname = "leave_record";
