@@ -28,7 +28,7 @@ if (isset($_SESSION['UID'])) {
   <?php require '../inc/header.php' ?>
   <div class="container-fluid text-center" style="height: 100vh;">
     <div class="row justify-content-md-center mt-5">
-      <h1>Log in to: -</h1>
+      <h1>Login into: -</h1>
       <div class="col-10 col-md-4 mt-5 mb-4">
         <div class="card">
           <div class="card-body half">
