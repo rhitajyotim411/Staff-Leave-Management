@@ -17,18 +17,21 @@ session_start();
   <link href="../style/log_reg.css" rel="stylesheet">
 </head>
 
-<?php
-if (isset($_SESSION['UID'])) {
-  echo "{$_SESSION['UID']} already logged in<br>";
-  echo "Redirecting to dashboard...";
-  die(header("refresh:2; URL=../{$_SESSION['type']}/dashboard.php"));
-}
-?>
-
 <body>
   <?php require '../inc/header.php' ?>
   <div class="container-fluid text-center" style="height: 100vh;">
-    <div class="row justify-content-md-center mt-5">
+    <div class="row justify-content-center mt-5">
+      <?php
+      if (isset($_SESSION['UID'])) {
+        ?>
+        <h5>
+          <?php echo $_SESSION['UID'] ?> already logged in <br>
+          Redirecting to dashboard...
+        </h5>
+        <?php
+        die(header("refresh:2; URL=../{$_SESSION['type']}/dashboard.php"));
+      }
+      ?>
       <h1>Login into: -</h1>
       <div class="col-10 col-md-4 mt-5 mb-4">
         <div class="card">
