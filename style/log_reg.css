@@ -2,12 +2,12 @@ body {
   background-color: #7feddf;
 }
 
-.half {
+.user-card {
   background-color: #ebfffe;
   border-radius: 5px;
 }
 
-.half:hover {
+.user-card:hover {
   background-color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 5px 8px 1px rgba(8, 49, 74, 0.25),

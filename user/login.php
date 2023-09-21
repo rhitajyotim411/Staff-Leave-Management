@@ -31,7 +31,7 @@ if (isset($_SESSION['UID'])) {
       <h1>Login into: -</h1>
       <div class="col-10 col-md-4 mt-5 mb-4">
         <div class="card">
-          <div class="card-body half">
+          <div class="card-body user-card">
             <h5 class="card-title">Admin</h5>
             <p class="card-text">Login to view staff leaves</p>
             <a href="../admin/login.php" class="btn btn-primary">Admin Login</a>
@@ -40,7 +40,7 @@ if (isset($_SESSION['UID'])) {
       </div>
       <div class="col-10 col-md-4 mt-5 mb-4">
         <div class="card">
-          <div class="card-body half">
+          <div class="card-body user-card">
             <h5 class="card-title">Staff</h5>
             <p class="card-text">Login to apply for leave</p>
             <a href="../staff/login.php" class="btn btn-primary">Staff Login</a>
