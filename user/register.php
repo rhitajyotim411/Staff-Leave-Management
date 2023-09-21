@@ -13,6 +13,7 @@ session_start();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <!-- CSS -->
+  <link href="../style/main.css" rel="stylesheet">
   <link href="../style/log_reg.css" rel="stylesheet">
 </head>
 
@@ -47,7 +48,7 @@ if (isset($_SESSION['UID'])) {
           </div>
         </div>
       </div>
-      <p>Already an user? Login <a href="./login.php">here</a></p>
+      <p>Already an user? Login <a class="ref" href="./login.php">here</a></p>
     </div>
   </div>
 </body>

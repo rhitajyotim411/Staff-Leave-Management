@@ -1,10 +1,7 @@
-body {
-  background-color: #7feddf;
-}
-
 .user-card {
   background-color: #ebfffe;
   border-radius: 5px;
+  color: #08314a;
 }
 
 .user-card:hover {
@@ -14,8 +11,3 @@ body {
     0 7px 20px 2px rgba(8, 49, 74, 0.2);
 }
 
-h1,
-h5,
-p {
-  color: #08314a !important;
-}
