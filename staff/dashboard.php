@@ -43,9 +43,6 @@ if ($_SESSION['type'] != 'staff') {
         <li>
             <a href="./record.php">Get leave record</a>
         </li>
-        <li>
-            <a href="../user/logout.php">Logout</a>
-        </li>
     </ul>
 </body>
 

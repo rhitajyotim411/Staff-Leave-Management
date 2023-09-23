@@ -40,9 +40,7 @@ if ($stmt->rowCount() > 0) {
     }
 
     $_SESSION['UID'] = $uid;
+    $_SESSION['name'] = $name;
     $_SESSION['type'] = 'admin';
-
-    echo "{$uid} successfully registered<br>";
-    echo "Redirecting to dashboard...";
-    header("refresh:2; URL=./dashboard.php");
+    header("Location: ./dashboard.php");
 }

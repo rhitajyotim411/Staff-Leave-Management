@@ -16,7 +16,7 @@ $tbname = "staff_login";
 $uid = $post["uid"];
 $passwd = $post["passwd"];
 
-$stmt = $conn->query("SELECT passwd from {$tbname} where uid='{$uid}'");
+$stmt = $conn->query("SELECT name, passwd from {$tbname} where uid='{$uid}'");
 $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($stmt->rowCount() < 1) {
@@ -27,10 +27,9 @@ if ($stmt->rowCount() < 1) {
 } else {
     if (password_verify($passwd, $data['passwd'])) {
         $_SESSION['UID'] = $uid;
+        $_SESSION['name'] = $data['name'];
         $_SESSION['type'] = 'staff';
-        echo "{$uid} succesfully logged in<br>";
-        echo "Redirecting to dashboard...";
-        header("refresh:2; URL=./dashboard.php");
+        header("Location: ./dashboard.php");
     } else {
         echo "<span style=\"color:red\">Wrong password</span><br>";
         echo "Redirecting to login...";
