@@ -9,16 +9,12 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaves Record</title>
-
-    <style>
-        table,
-        th,
-        td {
-            border: 2px solid black;
-            border-collapse: collapse;
-            padding: 5px 10px;
-        }
-    </style>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- CSS -->
+    <link href="../style/main.css" rel="stylesheet">
+    <link href="../style/table.css" rel="stylesheet">
 </head>
 
 <?php
@@ -48,6 +44,7 @@ $stmt = $conn->query($query);
 ?>
 
 <body>
+    <?php require '../inc/header.php' ?>
     <h2>Leaves Record</h2>
 
     <p>

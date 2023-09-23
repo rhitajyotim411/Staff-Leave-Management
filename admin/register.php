@@ -9,6 +9,11 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Register</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- CSS -->
+    <link href="../style/main.css" rel="stylesheet">
 </head>
 
 <?php
@@ -41,6 +46,7 @@ if (isset($_POST['passwd']))
 ?>
 
 <body>
+    <?php require '../inc/header.php' ?>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
         <label for="uid">Admin ID: </label>
         <input name="uid" type="text" length="10" maxlength="10" value="<?php echo $uid ?>"><br><br>
