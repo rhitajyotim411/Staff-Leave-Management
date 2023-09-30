@@ -18,7 +18,7 @@ session_start();
 
 <body>
     <?php require '../inc/header.php' ?>
-    <div class="container-fluid text-center" style="height: 100vh;">
+    <div class="container-fluid text-center">
         <div class="row justify-content-center mt-5">
             <?php
             if (!isset($_SESSION['UID'])) {

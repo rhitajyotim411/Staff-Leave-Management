@@ -8,7 +8,7 @@ if (!isset($_SESSION['post']) && $_SERVER['REQUEST_METHOD'] == 'GET' && realpath
     die(header("refresh:2; URL=../index.php"));
 }
 
-require_once '../util/connect.php';
+require_once '../inc/connect.php';
 $post = $_SESSION['post'];
 unset($_SESSION['post']);
 

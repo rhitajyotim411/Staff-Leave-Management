@@ -50,7 +50,7 @@ if (isset($_POST['passwd']))
         <input name="uid" type="text" length="10" maxlength="10" value="<?php echo $uid ?>"><br><br>
         <label for="passwd">Password: </label>
         <input name="passwd" type="password" length="100" maxlength="255" value="<?php echo $passwd ?>"><br><br>
-        <img id="captch" src="../util/captcha.php">&emsp;
+        <img id="captch" src="../inc/captcha.php">&emsp;
         <input type="submit" value="Refresh"><br><br>
         <label for="captcha" name="captcha">Captcha: </label>
         <input type="text" name="captcha" autocomplete="off" />&emsp;

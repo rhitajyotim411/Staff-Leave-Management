@@ -51,7 +51,7 @@ if (isset($_SESSION["staff_uid"])) {
             die("<a href='./dashboard.php'>Dashboard</a>");
         }
 
-        require_once '../util/connect.php';
+        require_once '../inc/connect.php';
         $tbleave = "staff_leave";
         $tbrec = "leave_record";
         $s_uid = $_POST['staff'];

@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERV
     die(header("refresh:2; URL=../index.php"));
 }
 
-require_once '../util/connect.php';
+require_once '../inc/connect.php';
 $tbname = "staff_leave";
 
 if (isset($_POST['edit_save'])) {

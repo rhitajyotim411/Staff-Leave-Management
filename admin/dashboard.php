@@ -14,39 +14,68 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- CSS -->
     <link href="../style/main.css" rel="stylesheet">
+    <link href="../style/card.css" rel="stylesheet">
 </head>
-
-<?php
-if (!isset($_SESSION['UID'])) {
-    echo "Please login to continue<br>";
-    echo "Redirecting to login page...";
-    die(header("refresh:2; URL=./login.php"));
-}
-if ($_SESSION['type'] != 'admin') {
-    echo '<h2 style="color: red">Access Denied!!</h2>';
-    echo 'Not an admin, Redirecting to dashboard...';
-    die(header("refresh:2; URL=../staff/dashboard.php"));
-}
-?>
 
 <body>
     <?php require '../inc/header.php' ?>
-    <h2>Welcome,
-        <?php echo $_SESSION['UID'] ?>
-    </h2>
+    <div class="container-fluid text-center">
+        <div class="row justify-content-center mt-5">
+            <?php
+            if (!isset($_SESSION['UID'])) {
+                echo "Please login to continue<br>";
+                echo "Redirecting to login page...";
+                die(header("refresh:2; URL=./login.php"));
+            }
+            if ($_SESSION['type'] != 'admin') {
+                echo '<h2 style="color: red">Access Denied!!</h2>';
+                echo 'Not an admin, Redirecting to dashboard...';
+                die(header("refresh:2; URL=../staff/dashboard.php"));
+            }
+            ?>
 
-    <h3>Dashboard: - </h3>
-    <ul>
-        <li>
-            <a href='./leave.php'>All staff leaves</a>
-        </li>
-        <li>
-            <a href='./record.php'>All leaves record</a>
-        </li>
-        <li>
-            <a href='./staff.php'>Get a staff leave record</a>
-        </li>
-    </ul>
+            <h2>Welcome,
+                <?php echo $_SESSION['name'] ?>
+            </h2>
+
+            <div class="col-sm-3 mt-5 mb-4">
+                <div class="card h-100">
+                    <div class="card-body user-card d-flex flex-column align-items-center justify-content-center">
+                        <h5 class="card-title">Staff Leaves</h5>
+                        <p class="card-text">
+                            View and edit leaves of all staffs
+                        </p>
+                        <a href="./leave.php" class="btn btn-primary">Leaves</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3 mt-5 mb-4">
+                <div class="card h-100">
+                    <div class="card-body user-card d-flex flex-column align-items-center justify-content-center">
+                        <h5 class="card-title">Leaves Record</h5>
+                        <p class="card-text">
+                            View all registered leave record<br>
+                            Approve/Deny leave requests
+                        </p>
+                        <a href="./record.php" class="btn btn-primary">Record</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3 mt-5 mb-4">
+                <div class="card h-100">
+                    <div class="card-body user-card d-flex flex-column align-items-center justify-content-center">
+                        <h5 class="card-title">Get a staff</h5>
+                        <p class="card-text">
+                            Access leave record details of a staff
+                        </p>
+                        <a href="./staff.php" class="btn btn-primary">Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

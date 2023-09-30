@@ -14,12 +14,12 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <!-- CSS -->
   <link href="../style/main.css" rel="stylesheet">
-  <link href="../style/log_reg.css" rel="stylesheet">
+  <link href="../style/card.css" rel="stylesheet">
 </head>
 
 <body>
   <?php require '../inc/header.php' ?>
-  <div class="container-fluid text-center" style="height: 100vh;">
+  <div class="container-fluid text-center">
     <div class="row justify-content-center mt-5">
       <?php
       if (isset($_SESSION['UID'])) {
@@ -33,7 +33,7 @@ session_start();
       }
       ?>
       <h1>Register as: -</h1>
-      <div class="col-10 col-md-4 mt-5 mb-4">
+      <div class="col-sm-4 mt-5 mb-4">
         <div class="card">
           <div class="card-body user-card">
             <h5 class="card-title">Admin</h5>
@@ -42,7 +42,7 @@ session_start();
           </div>
         </div>
       </div>
-      <div class="col-10 col-md-4 mt-5 mb-4">
+      <div class="col-sm-4 mt-5 mb-4">
         <div class="card">
           <div class="card-body user-card">
             <h5 class="card-title">Staff</h5>

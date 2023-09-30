@@ -29,7 +29,7 @@ if ($_SESSION['type'] != 'staff') {
     die(header("refresh:2; URL=../admin/dashboard.php"));
 }
 
-require_once '../util/connect.php';
+require_once '../inc/connect.php';
 
 $tbleave = "staff_leave";
 $tbname = "leave_record";
