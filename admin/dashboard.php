@@ -55,7 +55,7 @@ session_start();
                     <div class="card-body user-card d-flex flex-column align-items-center justify-content-center">
                         <h5 class="card-title">Leaves Record</h5>
                         <p class="card-text">
-                            View all registered leave record<br>
+                            View all registered leave records<br>
                             Approve/Deny leave requests
                         </p>
                         <a href="./record.php" class="btn btn-primary">Record</a>

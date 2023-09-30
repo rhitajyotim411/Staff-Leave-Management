@@ -117,8 +117,6 @@ $stmt = $conn->query($query);
         }
         ?>
     </table>
-    <br>
-    <a href='./dashboard.php'>Dashboard</a>
 </body>
 
 </html>

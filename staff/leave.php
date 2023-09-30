@@ -52,8 +52,7 @@ if ($_SESSION['type'] != 'staff') {
     <br><br>
 
     <input type="submit" />
-  </form><br>
-  <a href='./dashboard.php'>Dashboard</a>
+  </form>
 </body>
 
 </html>

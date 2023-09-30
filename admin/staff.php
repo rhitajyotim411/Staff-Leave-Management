@@ -171,8 +171,6 @@ if (isset($_SESSION["staff_uid"])) {
         <?php
     }
     ?>
-    <br>
-    <a href='./dashboard.php'>Dashboard</a>
 </body>
 
 </html>
