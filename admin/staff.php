@@ -41,7 +41,7 @@ if (isset($_SESSION["staff_uid"])) {
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
         <label for="staff">Staff UID: </label>
         <input type="text" name="staff">
-        <input type="submit">
+        <input type="submit" class="btn btn-primary">
     </form>
 
     <?php
@@ -91,7 +91,7 @@ if (isset($_SESSION["staff_uid"])) {
                 <td>
                     <form action="./edit.php" method="post">
                         <input type="hidden" name="stf_id" value=<?php echo $s_uid ?>>
-                        <input type="submit" name="submit" value="Edit">
+                        <input type="submit" name="submit" class="btn btn-primary" value="Edit">
                     </form>
                 </td>
             </tr>
@@ -113,7 +113,7 @@ if (isset($_SESSION["staff_uid"])) {
                     echo "selected" ?>>Pending</option>
                 </select>
                 <input type="hidden" name="fltr_id" value="<?php echo $_POST['staff'] ?>">
-            <input type="submit" name="fltr_lv" value="Filter">
+            <input type="submit" name="fltr_lv" class="btn btn-primary" value="Filter">
         </form>
         </p>
 
@@ -152,7 +152,7 @@ if (isset($_SESSION["staff_uid"])) {
                 if ($row['Status'] === 'Pending') {
                     echo "<form action=\"./approve.php\" method=\"post\">";
                     echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
-                    echo "<input type=\"submit\" name=\"submit\" value=\"Approve\">";
+                    echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Approve\">";
                     echo "</form>";
                 }
                 echo "</td>";
@@ -160,7 +160,7 @@ if (isset($_SESSION["staff_uid"])) {
                 if ($row['Status'] === 'Pending') {
                     echo "<form action=\"./deny.php\" method=\"post\">";
                     echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
-                    echo "<input type=\"submit\" name=\"submit\" value=\"Deny\">";
+                    echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Deny\">";
                     echo "</form>";
                 }
                 echo "</td>";

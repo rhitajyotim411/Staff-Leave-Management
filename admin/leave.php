@@ -63,7 +63,7 @@ if ($stmt->rowCount() < 1) {
             echo "<td>";
             echo "<form action=\"./edit.php\" method=\"post\">";
             echo "<input type=\"hidden\" name=\"stf_id\" value={$row['UID']}>";
-            echo "<input type=\"submit\" name=\"submit\" value=\"Edit\">";
+            echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Edit\">";
             echo "</form>";
             echo "</td>";
             echo "</tr>";
@@ -72,7 +72,7 @@ if ($stmt->rowCount() < 1) {
     </table>
     <br>
     <form action="./edit_all.php" method="post">
-        <input type="submit" name="submit" value="Edit All">
+        <input type="submit" name="submit" class="btn btn-primary" value="Edit All">
     </form>
 </body>
 

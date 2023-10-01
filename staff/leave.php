@@ -51,7 +51,7 @@ if ($_SESSION['type'] != 'staff') {
     <input type="date" name="to" />
     <br><br>
 
-    <input type="submit" />
+    <input type="submit" class="btn btn-primary" />
   </form>
 </body>
 

@@ -85,7 +85,7 @@ $stmt = $conn->query("SELECT * FROM $tbname");
         </table>
         <br>
         <input type="hidden" name="rows" value="<?php echo $stmt->rowCount() ?>">
-        <input type="submit" name="edit_save" value="Save">
+        <input type="submit" name="edit_save" class="btn btn-primary" value="Save">
     </form>
 </body>
 

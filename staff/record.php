@@ -82,7 +82,7 @@ $stmt = $conn->query($query);
                 <option value="Pending" <?php if ($fltr === "Pending")
                 echo "selected" ?>>Pending</option>
             </select>
-            <input type="submit" name="fltr_lv" value="Filter">
+            <input type="submit" name="fltr_lv" class="btn btn-primary" value="Filter">
         </form>
         </p>
 
@@ -122,7 +122,7 @@ $stmt = $conn->query($query);
             if ($row['Status'] === 'Pending') {
                 echo "<form action=\"./withdraw.php\" method=\"post\">";
                 echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
-                echo "<input type=\"submit\" name=\"submit\" value=\"Withdraw\">";
+                echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Withdraw\">";
                 echo "</form>";
             }
             echo "</td>";

@@ -87,7 +87,7 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
                     <input type="number" name="SL" value="<?php echo $data["SL"] ?>">
                 </td>
                 <td>
-                    <input type="submit" name="edit_save" value="Save">
+                    <input type="submit" name="edit_save" class="btn btn-primary" value="Save">
                 </td>
             </tr>
         </table>

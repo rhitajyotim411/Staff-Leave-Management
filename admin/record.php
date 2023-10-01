@@ -60,7 +60,7 @@ $stmt = $conn->query($query);
                 <option value="Pending" <?php if ($fltr === "Pending")
                 echo "selected" ?>>Pending</option>
             </select>
-            <input type="submit" name="fltr_lv" value="Filter">
+            <input type="submit" name="fltr_lv" class="btn btn-primary" value="Filter">
         </form>
         </p>
 
@@ -101,7 +101,7 @@ $stmt = $conn->query($query);
             if ($row['Status'] === 'Pending') {
                 echo "<form action=\"./approve.php\" method=\"post\">";
                 echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
-                echo "<input type=\"submit\" name=\"submit\" value=\"Approve\">";
+                echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Approve\">";
                 echo "</form>";
             }
             echo "</td>";
@@ -109,7 +109,7 @@ $stmt = $conn->query($query);
             if ($row['Status'] === 'Pending') {
                 echo "<form action=\"./deny.php\" method=\"post\">";
                 echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
-                echo "<input type=\"submit\" name=\"submit\" value=\"Deny\">";
+                echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Deny\">";
                 echo "</form>";
             }
             echo "</td>";

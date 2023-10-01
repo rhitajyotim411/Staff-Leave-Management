@@ -51,11 +51,11 @@ if (isset($_POST['passwd']))
         <label for="passwd">Password: </label>
         <input name="passwd" type="password" length="100" maxlength="255" value="<?php echo $passwd ?>"><br><br>
         <img id="captch" src="../inc/captcha.php">&emsp;
-        <input type="submit" value="Refresh"><br><br>
+        <input type="submit" class="btn btn-primary" value="Refresh"><br><br>
         <label for="captcha" name="captcha">Captcha: </label>
         <input type="text" name="captcha" autocomplete="off" />&emsp;
         <?php echo $vrf; ?><br><br>
-        <input type="submit" name="submit" value="Verify">
+        <input type="submit" name="submit" class="btn btn-primary" value="Verify">
     </form>
 </body>
 
