@@ -62,7 +62,7 @@ CREATE TABLE `leave_record` (
   CONSTRAINT `admin_app_fk` FOREIGN KEY (`Admin`) REFERENCES `admin_login` (`UID`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `staff_rec_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `status_ck` CHECK (`Status` in ('Pending','Approved','Denied'))
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `leave_record` (
 
 LOCK TABLES `leave_record` WRITE;
 /*!40000 ALTER TABLE `leave_record` DISABLE KEYS */;
-INSERT INTO `leave_record` VALUES (2,'staff3','LWP','2023-09-21','2023-09-22',2,'Approved','admin1'),(4,'staff2','OP','2023-09-13','2023-09-15',3,'Pending',NULL),(6,'staff1','SL','2023-09-15','2023-09-18',3,'Pending',NULL),(8,'staff4','CL','2023-10-03','2023-10-06',4,'Pending',NULL);
+INSERT INTO `leave_record` VALUES (2,'staff3','LWP','2023-09-21','2023-09-22',2,'Approved','admin4'),(4,'staff2','OP','2023-09-13','2023-09-15',3,'Approved','admin4'),(6,'staff1','SL','2023-09-15','2023-09-18',3,'Denied','admin1'),(8,'staff4','CL','2023-10-03','2023-10-06',4,'Denied','admin4'),(9,'staff1','CL','2023-09-15','2023-09-18',3,'Approved','admin4'),(10,'staff2','CL','2023-09-18','2023-09-19',2,'Denied','admin2'),(11,'staff4','LWP','2023-09-18','2023-09-20',3,'Approved','admin4'),(12,'staff4','SL','2023-09-21','2023-09-25',4,'Denied','admin3'),(16,'staff3','EL','2023-09-25','2023-09-25',1,'Approved','admin4'),(19,'staff4','CL','2023-10-30','2023-10-31',2,'Approved','admin1'),(20,'staff2','SL','2023-09-25','2023-09-30',5,'Approved','admin1'),(21,'staff1','LWP','2023-09-29','2023-09-29',1,'Approved','admin1');
 /*!40000 ALTER TABLE `leave_record` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +98,7 @@ CREATE TABLE `staff_leave` (
 
 LOCK TABLES `staff_leave` WRITE;
 /*!40000 ALTER TABLE `staff_leave` DISABLE KEYS */;
-INSERT INTO `staff_leave` VALUES ('staff1',5,12,27),('staff2',5,12,30),('staff3',5,12,30),('staff4',5,8,30);
+INSERT INTO `staff_leave` VALUES ('staff1',5,9,30),('staff2',5,12,25),('staff3',4,12,30),('staff4',5,10,30);
 /*!40000 ALTER TABLE `staff_leave` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-11  0:25:25
+-- Dump completed on 2023-10-09  0:41:01
