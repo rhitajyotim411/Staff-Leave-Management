@@ -3,6 +3,10 @@ body {
   color: #08314a;
 }
 
+hr {
+  width: 50%;
+}
+
 .ref {
   color: #08314a;
   text-decoration: none;

@@ -57,34 +57,36 @@ if (isset($_POST['passwd']))
                         <h5 class="card-title">Admin registration</h5>
                         <p class="card-text">
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                            <table>
-                                <tr>
-                                    <td><label for="uid">Admin ID: </label></td>
-                                    <td><input name="uid" type="text" length="10" maxlength="10" value="<?php echo $uid ?>"></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="name">Full Name: </label></td>
-                                    <td><input name="name" type="text" length="100" maxlength="255" value="<?php echo $name ?>"></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="passwd">Password: </label></td>
-                                    <td><input name="passwd" type="password" length="100" maxlength="255" value="<?php echo $passwd ?>"></td>
-                                </tr>
-                                <tr>
-                                    <td><img id="captch" src="../inc/captcha.php"></td>
-                                    <td><input type="submit" class="btn btn-primary" value="Refresh"></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="captcha" name="captcha">Captcha: </label></td>
-                                    <td><input type="text" name="captcha" autocomplete="off" /></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><?php echo $vrf; ?></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><input type="submit" name="submit" class="btn btn-primary" value="Verify"></td>
-                                </tr>
-                            </table>
+                            <div class="d-flex justify-content-center">
+                                <table>
+                                    <tr>
+                                        <td><label for="uid">Admin ID: </label></td>
+                                        <td><input name="uid" type="text" length="10" maxlength="10" value="<?php echo $uid ?>"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="name">Full Name: </label></td>
+                                        <td><input name="name" type="text" length="100" maxlength="255" value="<?php echo $name ?>"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="passwd">Password: </label></td>
+                                        <td><input name="passwd" type="password" length="100" maxlength="255" value="<?php echo $passwd ?>"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img id="captch" src="../inc/captcha.php"></td>
+                                        <td><input type="submit" class="btn btn-primary" value="Refresh"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="captcha" name="captcha">Captcha: </label></td>
+                                        <td><input type="text" name="captcha" autocomplete="off" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><?php echo $vrf; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><input type="submit" name="submit" class="btn btn-primary" value="Verify"></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </form>
                         </p>
                     </div>
