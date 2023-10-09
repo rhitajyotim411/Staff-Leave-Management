@@ -1,46 +1,69 @@
 <?php
 session_start();
+?>
 
-if (!isset($_SESSION['post']) && $_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
-    header('HTTP/1.0 403 Forbidden', TRUE, 403);
-    echo '<h2 style="color: red">Access Denied!!</h2>';
-    echo 'Redirecting...';
-    die(header("refresh:2; URL=../index.php"));
-}
+<!DOCTYPE html>
+<html lang="en">
 
-require_once '../inc/connect.php';
-$post = $_SESSION['post'];
-unset($_SESSION['post']);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Register</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- CSS -->
+    <link href="../style/main.css" rel="stylesheet">
+</head>
 
-$tbname = "admin_login";
-$uid = $post["uid"];
-$name = $post["name"];
-$passwd = $post["passwd"];
+<body>
+    <?php require '../inc/header.php' ?>
+    <div class="container-fluid text-center mt-5">
+        <?php
+        if (!isset($_SESSION['post']) && $_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
+            header('HTTP/1.0 403 Forbidden', TRUE, 403);
+            echo '<h2 style="color: red">Access Denied!!</h2>';
+            echo 'Redirecting...';
+            die(header("refresh:2; URL=../index.php"));
+        }
 
-$stmt = $conn->query("SELECT passwd from {$tbname} where uid='{$uid}'");
-$data = $stmt->fetch(PDO::FETCH_ASSOC);
+        require_once '../inc/connect.php';
+        $post = $_SESSION['post'];
+        unset($_SESSION['post']);
 
-if ($stmt->rowCount() > 0) {
-    echo "{$uid} already registered<br>";
-    echo '<br>';
-    echo "<a href='../user/login.php'>Login here</a> ";
-    echo "or <a href='./register.php'>register again</a> with different ID";
-} else {
-    try {
-        $sql = "INSERT INTO {$tbname} VALUES(:uid, :name, :passwd)";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([
-            ':uid' => $uid,
-            ':name' => $name,
-            ':passwd' => password_hash($passwd, PASSWORD_DEFAULT)
-        ]);
-    } catch (PDOException $e) {
-        echo "Insertion failed: " . $e->getMessage();
-        die("<br><a href='../index.php'>Homepage</a>");
-    }
+        $tbname = "admin_login";
+        $uid = $post["uid"];
+        $name = $post["name"];
+        $passwd = $post["passwd"];
 
-    $_SESSION['UID'] = $uid;
-    $_SESSION['name'] = $name;
-    $_SESSION['type'] = 'admin';
-    header("Location: ./dashboard.php");
-}
+        $stmt = $conn->query("SELECT passwd from {$tbname} where uid='{$uid}'");
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($stmt->rowCount() > 0) {
+            echo "<h5>{$uid} already registered</h5>";
+            echo "<a class=\"ref\" href='../user/login.php'>Login here</a> ";
+            echo "or <a class=\"ref\" href='./register.php'>register again</a> with different ID";
+        } else {
+            try {
+                $sql = "INSERT INTO {$tbname} VALUES(:uid, :name, :passwd)";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([
+                    ':uid' => $uid,
+                    ':name' => $name,
+                    ':passwd' => password_hash($passwd, PASSWORD_DEFAULT)
+                ]);
+            } catch (PDOException $e) {
+                echo "Insertion failed: " . $e->getMessage();
+                die("<br><a class=\"ref\" href='../index.php'>Homepage</a>");
+            }
+
+            $_SESSION['UID'] = $uid;
+            $_SESSION['name'] = $name;
+            $_SESSION['type'] = 'admin';
+            header("Location: ./dashboard.php");
+        }
+        ?>
+    </div>
+</body>
+
+</html>
