@@ -78,8 +78,8 @@ $lv_types = ['EL', 'CL', 'SL'];
         $d = days($from, $to);
 
         if ($to < $from or $from < date("Y-m-d")) {
-            echo "Enter dates correctly";
-            die("<br><a href='./leave.php'>Re-apply for leave</a>");
+            echo "<p style=\"color: red\">Enter dates correctly</p>";
+            die("<a class='ref' href='./leave.php'><strong>Re-apply for leave</strong></a>");
         }
 
         try {
@@ -120,7 +120,7 @@ $lv_types = ['EL', 'CL', 'SL'];
                 echo "Requested {$type}s: $d<br>";
                 if ($t)
                     echo "Remaining {$type}s: " . ($data[$type] - $d) . "<br>";
-                echo "Leave request successfully registered<br>";
+                echo "<strong>Leave request successfully registered</strong><br>";
             }
         } catch (PDOException $e) {
             die("Insertion failed: " . $e->getMessage());
