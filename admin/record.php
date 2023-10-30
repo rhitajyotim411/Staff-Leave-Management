@@ -17,35 +17,35 @@ session_start();
     <link href="../style/table.css" rel="stylesheet">
 </head>
 
-<?php
-if (!isset($_SESSION['UID'])) {
-    echo "Please login to continue<br>";
-    echo "Redirecting to login page...";
-    die(header("refresh:2; URL=./login.php"));
-}
-if ($_SESSION['type'] != 'admin') {
-    echo '<h2 style="color: red">Access Denied!!</h2>';
-    echo 'Not an admin, Redirecting to dashboard...';
-    die(header("refresh:2; URL=../staff/dashboard.php"));
-}
-
-require_once '../inc/connect.php';
-
-$tbname = "leave_record";
-$fields = "SN, UID, Type, `From`, `To`, Days, Status";
-
-$fltr = "";
-if (isset($_POST['fltr_lv']) and $_POST['filter'] != 'All') {
-    $query = "SELECT $fields FROM $tbname WHERE status='{$_POST['filter']}' ORDER BY `From`";
-    $fltr = $_POST['filter'];
-} else
-    $query = "SELECT $fields FROM $tbname ORDER BY `From`";
-$stmt = $conn->query($query);
-?>
-
 <body>
     <?php require '../inc/header.php' ?>
     <div class="container-fluid text-center mt-3">
+        <?php
+        if (!isset($_SESSION['UID'])) {
+            echo "Please login to continue<br>";
+            echo "Redirecting to login page...";
+            die(header("refresh:2; URL=./login.php"));
+        }
+        if ($_SESSION['type'] != 'admin') {
+            echo '<h2 style="color: red">Access Denied!!</h2>';
+            echo 'Not an admin, Redirecting to dashboard...';
+            die(header("refresh:2; URL=../staff/dashboard.php"));
+        }
+
+        require_once '../inc/connect.php';
+
+        $tbname = "leave_record";
+        $fields = "SN, UID, Type, `From`, `To`, Days, Status";
+
+        $fltr = "";
+        if (isset($_POST['fltr_lv']) and $_POST['filter'] != 'All') {
+            $query = "SELECT $fields FROM $tbname WHERE status='{$_POST['filter']}' ORDER BY `From`";
+            $fltr = $_POST['filter'];
+        } else
+            $query = "SELECT $fields FROM $tbname ORDER BY `From`";
+        $stmt = $conn->query($query);
+        ?>
+        
         <h2>Leaves Record</h2>
         <div class="d-flex justify-content-center">
             <hr>

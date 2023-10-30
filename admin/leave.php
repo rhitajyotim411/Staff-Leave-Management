@@ -17,32 +17,32 @@ session_start();
     <link href="../style/table.css" rel="stylesheet">
 </head>
 
-<?php
-if (!isset($_SESSION['UID'])) {
-    echo "Please login to continue<br>";
-    echo "Redirecting to login page...";
-    die(header("refresh:2; URL=./login.php"));
-}
-if ($_SESSION['type'] != 'admin') {
-    echo '<h2 style="color: red">Access Denied!!</h2>';
-    echo 'Not an admin, Redirecting to dashboard...';
-    die(header("refresh:2; URL=../staff/dashboard.php"));
-}
-
-require_once '../inc/connect.php';
-
-$tbname = "staff_leave";
-
-$stmt = $conn->query("SELECT * FROM $tbname");
-
-if ($stmt->rowCount() < 1) {
-    die("<p>No staffs found<br></p>");
-}
-?>
-
 <body>
     <?php require '../inc/header.php' ?>
     <div class="container-fluid text-center mt-3">
+        <?php
+        if (!isset($_SESSION['UID'])) {
+            echo "Please login to continue<br>";
+            echo "Redirecting to login page...";
+            die(header("refresh:2; URL=./login.php"));
+        }
+        if ($_SESSION['type'] != 'admin') {
+            echo '<h2 style="color: red">Access Denied!!</h2>';
+            echo 'Not an admin, Redirecting to dashboard...';
+            die(header("refresh:2; URL=../staff/dashboard.php"));
+        }
+
+        require_once '../inc/connect.php';
+
+        $tbname = "staff_leave";
+
+        $stmt = $conn->query("SELECT * FROM $tbname");
+
+        if ($stmt->rowCount() < 1) {
+            die("<p>No staffs found<br></p>");
+        }
+        ?>
+        
         <h2>All Staff leaves</h2>
         <div class="d-flex justify-content-center">
             <hr>
@@ -75,7 +75,7 @@ if ($stmt->rowCount() < 1) {
                 ?>
             </table>
         </div>
-        
+
         <form action="./edit_all.php" method="post">
             <input type="submit" name="submit" class="btn btn-primary" value="Edit All">
         </form>

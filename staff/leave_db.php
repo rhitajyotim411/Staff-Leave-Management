@@ -1,22 +1,6 @@
 <?php
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
-    header('HTTP/1.0 403 Forbidden', TRUE, 403);
-    echo '<h2 style="color: red">Access Denied!!</h2>';
-    echo 'Redirecting...';
-    die(header("refresh:2; URL=../index.php"));
-}
-
-require_once '../inc/connect.php';
-
-$tbleave = "staff_leave";
-$tbname = "leave_record";
-$type = $_POST['leave_type'];
-$from = $_POST['from'];
-$to = $_POST['to'];
-$uid = $_SESSION['UID'];
-
 function days($from, $to)
 {
     $workingDays = [1, 2, 3, 4, 5]; # date format = N (1 = Monday, ...)
@@ -68,6 +52,22 @@ $lv_types = ['EL', 'CL', 'SL'];
     <?php require '../inc/header.php' ?>
     <div class="container-fluid text-center mt-5">
         <?php
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
+            header('HTTP/1.0 403 Forbidden', TRUE, 403);
+            echo '<h2 style="color: red">Access Denied!!</h2>';
+            echo 'Redirecting...';
+            die(header("refresh:2; URL=../index.php"));
+        }
+
+        require_once '../inc/connect.php';
+
+        $tbleave = "staff_leave";
+        $tbname = "leave_record";
+        $type = $_POST['leave_type'];
+        $from = $_POST['from'];
+        $to = $_POST['to'];
+        $uid = $_SESSION['UID'];
+
         echo "<h2>Leave request summary</h2>";
         echo "<div class=\"d-flex justify-content-center\">";
         echo "<hr>";

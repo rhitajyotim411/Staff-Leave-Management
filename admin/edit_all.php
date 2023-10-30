@@ -22,38 +22,38 @@ session_start();
     </style>
 </head>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
-    header('HTTP/1.0 403 Forbidden', TRUE, 403);
-    echo '<h2 style="color: red">Access Denied!!</h2>';
-    echo 'Redirecting...';
-    die(header("refresh:2; URL=../index.php"));
-}
-
-require_once '../inc/connect.php';
-$tbname = "staff_leave";
-
-if (isset($_POST['edit_save'])) {
-    for ($i = 1; $i <= $_POST['rows']; $i++) {
-        $sql = "UPDATE $tbname SET EL=:el, CL=:cl, SL=:sl WHERE UID=:uid";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([
-            ':el' => $_POST["EL_$i"],
-            ':cl' => $_POST["CL_$i"],
-            ':sl' => $_POST["SL_$i"],
-            ':uid' => $_POST["ID_$i"]
-        ]);
-    }
-
-    die(header("Location: ./leave.php"));
-}
-
-$stmt = $conn->query("SELECT * FROM $tbname");
-?>
-
 <body>
     <?php require '../inc/header.php' ?>
     <div class="container-fluid text-center mt-3">
+        <?php
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
+            header('HTTP/1.0 403 Forbidden', TRUE, 403);
+            echo '<h2 style="color: red">Access Denied!!</h2>';
+            echo 'Redirecting...';
+            die(header("refresh:2; URL=../index.php"));
+        }
+
+        require_once '../inc/connect.php';
+        $tbname = "staff_leave";
+
+        if (isset($_POST['edit_save'])) {
+            for ($i = 1; $i <= $_POST['rows']; $i++) {
+                $sql = "UPDATE $tbname SET EL=:el, CL=:cl, SL=:sl WHERE UID=:uid";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([
+                    ':el' => $_POST["EL_$i"],
+                    ':cl' => $_POST["CL_$i"],
+                    ':sl' => $_POST["SL_$i"],
+                    ':uid' => $_POST["ID_$i"]
+                ]);
+            }
+
+            die(header("Location: ./leave.php"));
+        }
+
+        $stmt = $conn->query("SELECT * FROM $tbname");
+        ?>
+        
         <h2>Edit for all staffs</h2>
         <div class="d-flex justify-content-center">
             <hr>

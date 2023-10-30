@@ -17,22 +17,21 @@ session_start();
   <link href="../style/form.css" rel="stylesheet">
 </head>
 
-<?php
-if (!isset($_SESSION['UID'])) {
-  echo "Please login to continue<br>";
-  echo "Redirecting to login page...";
-  die(header("refresh:2; URL=./login.php"));
-}
-if ($_SESSION['type'] != 'staff') {
-  echo '<h2 style="color: red">Access Denied!!</h2>';
-  echo 'Not a staff, Redirecting to dashboard...';
-  die(header("refresh:2; URL=../admin/dashboard.php"));
-}
-?>
-
 <body>
   <?php require '../inc/header.php' ?>
   <div class="container-fluid text-center mt-3">
+    <?php
+    if (!isset($_SESSION['UID'])) {
+      echo "Please login to continue<br>";
+      echo "Redirecting to login page...";
+      die(header("refresh:2; URL=./login.php"));
+    }
+    if ($_SESSION['type'] != 'staff') {
+      echo '<h2 style="color: red">Access Denied!!</h2>';
+      echo 'Not a staff, Redirecting to dashboard...';
+      die(header("refresh:2; URL=../admin/dashboard.php"));
+    }
+    ?>
     <div class="row justify-content-center mt-5">
       <div class="col-sm-4 mt-3 mb-3">
         <div class="card">

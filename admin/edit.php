@@ -22,51 +22,51 @@ session_start();
     </style>
 </head>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
-    header('HTTP/1.0 403 Forbidden', TRUE, 403);
-    echo '<h2 style="color: red">Access Denied!!</h2>';
-    echo 'Redirecting...';
-    die(header("refresh:2; URL=../index.php"));
-}
-
-require_once '../inc/connect.php';
-$tbname = "staff_leave";
-
-if (!isset($_SESSION['referer']))
-    $_SESSION['referer'] = $_SERVER['HTTP_REFERER'];
-
-if (isset($_POST['edit_save'])) {
-    $sql = "UPDATE $tbname SET EL=:el, CL=:cl, SL=:sl WHERE UID=:uid";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([
-        ':el' => $_POST['EL'],
-        ':cl' => $_POST['CL'],
-        ':sl' => $_POST['SL'],
-        ':uid' => $_POST['edit_id']
-    ]);
-
-    $x = $_SESSION['referer'];
-    $pg = explode('/', $x);
-    $pg = end($pg);
-
-    if ($pg === 'staff.php') {
-        $_SESSION["staff_uid"] = $_POST['edit_id'];
-    }
-
-    unset($_SESSION['referer']);
-    die(header("Location: $x"));
-}
-
-$id = $_POST['stf_id'];
-
-$stmt = $conn->query("SELECT * FROM $tbname WHERE uid='$id'");
-$data = $stmt->fetch(PDO::FETCH_ASSOC);
-?>
-
 <body>
     <?php require '../inc/header.php' ?>
     <div class="container-fluid text-center mt-3">
+        <?php
+        if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
+            header('HTTP/1.0 403 Forbidden', TRUE, 403);
+            echo '<h2 style="color: red">Access Denied!!</h2>';
+            echo 'Redirecting...';
+            die(header("refresh:2; URL=../index.php"));
+        }
+
+        require_once '../inc/connect.php';
+        $tbname = "staff_leave";
+
+        if (!isset($_SESSION['referer']))
+            $_SESSION['referer'] = $_SERVER['HTTP_REFERER'];
+
+        if (isset($_POST['edit_save'])) {
+            $sql = "UPDATE $tbname SET EL=:el, CL=:cl, SL=:sl WHERE UID=:uid";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([
+                ':el' => $_POST['EL'],
+                ':cl' => $_POST['CL'],
+                ':sl' => $_POST['SL'],
+                ':uid' => $_POST['edit_id']
+            ]);
+
+            $x = $_SESSION['referer'];
+            $pg = explode('/', $x);
+            $pg = end($pg);
+
+            if ($pg === 'staff.php') {
+                $_SESSION["staff_uid"] = $_POST['edit_id'];
+            }
+
+            unset($_SESSION['referer']);
+            die(header("Location: $x"));
+        }
+
+        $id = $_POST['stf_id'];
+
+        $stmt = $conn->query("SELECT * FROM $tbname WHERE uid='$id'");
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        ?>
+        
         <h2>Edit for
             <?php echo $id ?>
         </h2>
