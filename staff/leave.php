@@ -14,6 +14,7 @@ session_start();
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <!-- CSS -->
   <link href="../style/main.css" rel="stylesheet">
+  <link href="../style/form.css" rel="stylesheet">
 </head>
 
 <?php
@@ -31,28 +32,56 @@ if ($_SESSION['type'] != 'staff') {
 
 <body>
   <?php require '../inc/header.php' ?>
-  <form action="./leave_db.php" method="post">
-    <!--Types of leave-->
-    <label for="leave_type">Select type of leave:</label>
-    <select name="leave_type">
-      <option value="EL">Earned Leave (EL)</option>
-      <option value="CL">Casual Leave (CL)</option>
-      <option value="SL">Sick Leave (SL)</option>
-      <option value="OP">Outdoor duty (OP)</option>
-      <option value="LWP">Leave Without Pay (LWP)</option>
-    </select>
-    <br><br>
+  <div class="container-fluid text-center mt-3">
+    <div class="row justify-content-center mt-5">
+      <div class="col-sm-4 mt-3 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Apply for leave</h5>
+            <p class="card-text">
+            <form action="./leave_db.php" method="post">
+              <div class="d-flex justify-content-center mt-3 mb-3">
+                <table>
+                  <!--Types of leave-->
+                  <tr>
+                    <td>
+                      <label for="leave_type">Select type of leave:</label>
+                    </td>
+                    <td>
+                      <select name="leave_type">
+                        <option value="EL">Earned Leave (EL)</option>
+                        <option value="CL">Casual Leave (CL)</option>
+                        <option value="SL">Sick Leave (SL)</option>
+                        <option value="OP">Outdoor duty (OP)</option>
+                        <option value="LWP">Leave Without Pay (LWP)</option>
+                      </select>
+                    </td>
+                  </tr>
 
-    <!--Duration-->
-    <label for="from">From: </label>
-    <input type="date" name="from" />
-    <br><br>
-    <label for="to">To: </label>
-    <input type="date" name="to" />
-    <br><br>
+                  <!--Duration-->
+                  <tr>
+                    <td><label for="from">From: </label></td>
+                    <td><input type="date" name="from" /></td>
+                  </tr>
+                  <tr>
+                    <td><label for="to">To: </label></td>
+                    <td><input type="date" name="to" /></td>
+                  </tr>
 
-    <input type="submit" class="btn btn-primary" />
-  </form>
+                  <tr>
+                    <td colspan="2">
+                      <input type="submit" class="btn btn-primary" />
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </form>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

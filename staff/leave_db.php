@@ -66,65 +66,68 @@ $lv_types = ['EL', 'CL', 'SL'];
 
 <body>
     <?php require '../inc/header.php' ?>
-    <?php
-    echo "<h2>Leave request summary</h2>";
-    echo "From: $from<br>";
-    echo "To: $to<br>";
+    <div class="container-fluid text-center mt-5">
+        <?php
+        echo "<h2>Leave request summary</h2>";
+        echo "<div class=\"d-flex justify-content-center\">";
+        echo "<hr>";
+        echo "</div>";
+        echo "From: $from<br>";
+        echo "To: $to<br>";
 
-    $d = days($from, $to);
+        $d = days($from, $to);
 
-    if ($to < $from or $from < date("Y-m-d")) {
-        echo "Enter dates correctly";
-        die("<br><a href='./leave.php'>Re-apply for leave</a>");
-    }
-
-    try {
-        $t = in_array($type, $lv_types);
-        if ($t) {
-            global $data;
-            $stmt = $conn->query("SELECT $type from $tbleave where uid='$uid'");
-            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($to < $from or $from < date("Y-m-d")) {
+            echo "Enter dates correctly";
+            die("<br><a href='./leave.php'>Re-apply for leave</a>");
         }
-        if ($t and $data[$type] < $d) {
-            echo "Requested {$type}s: $d<br>";
-            echo "Available {$type}s: $data[$type]<br>";
-            echo "Not enough {$type}s available<br>";
-            echo "Leave request failed<br>";
-        } else {
-            // enter leave record
-            $sql = "INSERT INTO $tbname (UID, Type, `From`, `To`, Days) ";
-            $sql .= "VALUES(:uid, :type, :from, :to, :days)";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([
-                ':uid' => $uid,
-                ':type' => $type,
-                ':from' => $from,
-                ':to' => $to,
-                ':days' => $d
-            ]);
 
-            // update leave
+        try {
+            $t = in_array($type, $lv_types);
             if ($t) {
-                $sql = "UPDATE $tbleave SET $type=:days WHERE UID=:uid";
+                global $data;
+                $stmt = $conn->query("SELECT $type from $tbleave where uid='$uid'");
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+            if ($t and $data[$type] < $d) {
+                echo "Requested {$type}s: $d<br>";
+                echo "Available {$type}s: $data[$type]<br>";
+                echo "Not enough {$type}s available<br>";
+                echo "Leave request failed<br>";
+            } else {
+                // enter leave record
+                $sql = "INSERT INTO $tbname (UID, Type, `From`, `To`, Days) ";
+                $sql .= "VALUES(:uid, :type, :from, :to, :days)";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([
-                    ':days' => $data[$type] - $d,
-                    ':uid' => $uid
+                    ':uid' => $uid,
+                    ':type' => $type,
+                    ':from' => $from,
+                    ':to' => $to,
+                    ':days' => $d
                 ]);
+
+                // update leave
+                if ($t) {
+                    $sql = "UPDATE $tbleave SET $type=:days WHERE UID=:uid";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute([
+                        ':days' => $data[$type] - $d,
+                        ':uid' => $uid
+                    ]);
+                }
+
+                echo "Requested {$type}s: $d<br>";
+                if ($t)
+                    echo "Remaining {$type}s: " . ($data[$type] - $d) . "<br>";
+                echo "Leave request successfully registered<br>";
             }
-
-            echo "Requested {$type}s: $d<br>";
-            if ($t)
-                echo "Remaining {$type}s: " . ($data[$type] - $d) . "<br>";
-            echo "Leave request successfully registered<br>";
+        } catch (PDOException $e) {
+            echo "Insertion failed: " . $e->getMessage();
+            die("<br><a href='./dashboard.php'>Dashboard</a>");
         }
-    } catch (PDOException $e) {
-        echo "Insertion failed: " . $e->getMessage();
-        die("<br><a href='./dashboard.php'>Dashboard</a>");
-    }
-
-    echo "<br><a href='./dashboard.php'>Dashboard</a>";
-    ?>
+        ?>
+    </div>
 </body>
 
 </html>
