@@ -93,7 +93,7 @@ $lv_types = ['EL', 'CL', 'SL'];
                 echo "Requested {$type}s: $d<br>";
                 echo "Available {$type}s: $data[$type]<br>";
                 echo "Not enough {$type}s available<br>";
-                echo "Leave request failed<br>";
+                echo "<strong>Leave request failed</strong><br>";
             } else {
                 // enter leave record
                 $sql = "INSERT INTO $tbname (UID, Type, `From`, `To`, Days) ";
