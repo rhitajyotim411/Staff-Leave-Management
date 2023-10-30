@@ -45,77 +45,84 @@ $stmt = $conn->query($query);
 
 <body>
     <?php require '../inc/header.php' ?>
-    <h2>Leaves Record</h2>
+    <div class="container-fluid text-center mt-3">
+        <h2>Leaves Record</h2>
+        <div class="d-flex justify-content-center">
+            <hr>
+        </div>
 
-    <p>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-        <label for="filter">Filter:</label>
-        <select name="filter">
-            <option value="All" <?php if ($fltr === "")
-                echo "selected" ?>>All</option>
+        <p>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+            <label for="filter">Filter:</label>
+            <select name="filter">
+                <option value="All" <?php if ($fltr === "")
+                                        echo "selected" ?>>All</option>
                 <option value="Approved" <?php if ($fltr === "Approved")
-                echo "selected" ?>>Approved</option>
+                                                echo "selected" ?>>Approved</option>
                 <option value="Denied" <?php if ($fltr === "Denied")
-                echo "selected" ?>>Denied</option>
+                                            echo "selected" ?>>Denied</option>
                 <option value="Pending" <?php if ($fltr === "Pending")
-                echo "selected" ?>>Pending</option>
+                                            echo "selected" ?>>Pending</option>
             </select>
             <input type="submit" name="fltr_lv" class="btn btn-primary" value="Filter">
         </form>
         </p>
 
         <?php
-            if ($stmt->rowCount() < 1) {
-                die("<p>No leave record found<br></p>");
-            }
-            ?>
-
-    <table>
-        <tr>
-            <th>UID</th>
-            <th>Type</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Days</th>
-            <th>Status</th>
-            <th colspan=2>Actions</th>
-        </tr>
-        <?php
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            if ($row['Status'] === 'Approved')
-                $clr = 'green';
-            elseif ($row['Status'] === 'Denied')
-                $clr = 'red';
-            else
-                $clr = 'black';
-
-            echo "<tr>";
-            echo "<td>{$row['UID']}</td>";
-            echo "<td>{$row['Type']}</td>";
-            echo "<td>{$row['From']}</td>";
-            echo "<td>{$row['To']}</td>";
-            echo "<td style=\"text-align: center\">{$row['Days']}</td>";
-            echo "<td style=\"color: $clr\">{$row['Status']}</td>";
-            echo "<td>";
-            if ($row['Status'] === 'Pending') {
-                echo "<form action=\"./approve.php\" method=\"post\">";
-                echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
-                echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Approve\">";
-                echo "</form>";
-            }
-            echo "</td>";
-            echo "<td>";
-            if ($row['Status'] === 'Pending') {
-                echo "<form action=\"./deny.php\" method=\"post\">";
-                echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
-                echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Deny\">";
-                echo "</form>";
-            }
-            echo "</td>";
-            echo "</tr>";
+        if ($stmt->rowCount() < 1) {
+            die("<p>No leave record found<br></p>");
         }
         ?>
-    </table>
+
+        <div class="d-flex justify-content-center mt-3 mb-3">
+            <table>
+                <tr>
+                    <th>UID</th>
+                    <th>Type</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Days</th>
+                    <th>Status</th>
+                    <th colspan=2>Actions</th>
+                </tr>
+                <?php
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    if ($row['Status'] === 'Approved')
+                        $clr = 'green';
+                    elseif ($row['Status'] === 'Denied')
+                        $clr = 'red';
+                    else
+                        $clr = 'black';
+
+                    echo "<tr>";
+                    echo "<td>{$row['UID']}</td>";
+                    echo "<td>{$row['Type']}</td>";
+                    echo "<td>{$row['From']}</td>";
+                    echo "<td>{$row['To']}</td>";
+                    echo "<td style=\"text-align: center\">{$row['Days']}</td>";
+                    echo "<td style=\"color: $clr\">{$row['Status']}</td>";
+                    echo "<td>";
+                    if ($row['Status'] === 'Pending') {
+                        echo "<form action=\"./approve.php\" method=\"post\">";
+                        echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
+                        echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Approve\">";
+                        echo "</form>";
+                    }
+                    echo "</td>";
+                    echo "<td>";
+                    if ($row['Status'] === 'Pending') {
+                        echo "<form action=\"./deny.php\" method=\"post\">";
+                        echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
+                        echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Deny\">";
+                        echo "</form>";
+                    }
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>
