@@ -53,40 +53,48 @@ $stmt = $conn->query("SELECT * FROM $tbname");
 
 <body>
     <?php require '../inc/header.php' ?>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-        <table>
-            <tr>
-                <th>UID</th>
-                <th>Earned leave<br>(EL)</th>
-                <th>Casual leave<br>(CL)</th>
-                <th>Sick leave<br>(SL)</th>
-            </tr>
-            <?php
-            $cx = 0;
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $cx += 1;
-                echo "<tr>";
-                echo "<td>";
-                echo "{$row['UID']}";
-                echo "<input type=\"hidden\" name=\"ID_$cx\" value={$row['UID']}>";
-                echo "</td>";
-                echo "<td>";
-                echo "<input type=\"number\" name=\"EL_$cx\" value=\"{$row["EL"]}\">";
-                echo "</td>";
-                echo "<td>";
-                echo "<input type=\"number\" name=\"CL_$cx\" value=\"{$row["CL"]}\">";
-                echo "</td>";
-                echo "<td>";
-                echo "<input type=\"number\" name=\"SL_$cx\" value=\"{$row["SL"]}\">";
-                echo "</td>";
-                echo "</tr>";
-            }
-            ?>
-        </table>
-        <br>
-        <input type="hidden" name="rows" value="<?php echo $stmt->rowCount() ?>">
-        <input type="submit" name="edit_save" class="btn btn-primary" value="Save">
-    </form>
+    <div class="container-fluid text-center mt-3">
+        <h2>Edit for all staffs</h2>
+        <div class="d-flex justify-content-center">
+            <hr>
+        </div>
+
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+            <div class="d-flex justify-content-center mt-3 mb-3">
+                <table>
+                    <tr>
+                        <th>UID</th>
+                        <th>Earned leave<br>(EL)</th>
+                        <th>Casual leave<br>(CL)</th>
+                        <th>Sick leave<br>(SL)</th>
+                    </tr>
+                    <?php
+                    $cx = 0;
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $cx += 1;
+                        echo "<tr>";
+                        echo "<td>";
+                        echo "{$row['UID']}";
+                        echo "<input type=\"hidden\" name=\"ID_$cx\" value={$row['UID']}>";
+                        echo "</td>";
+                        echo "<td>";
+                        echo "<input type=\"number\" name=\"EL_$cx\" value=\"{$row["EL"]}\">";
+                        echo "</td>";
+                        echo "<td>";
+                        echo "<input type=\"number\" name=\"CL_$cx\" value=\"{$row["CL"]}\">";
+                        echo "</td>";
+                        echo "<td>";
+                        echo "<input type=\"number\" name=\"SL_$cx\" value=\"{$row["SL"]}\">";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </table>
+            </div>
+            <br>
+            <input type="hidden" name="rows" value="<?php echo $stmt->rowCount() ?>">
+            <input type="submit" name="edit_save" class="btn btn-primary" value="Save">
+        </form>
 </body>
 
 </html>

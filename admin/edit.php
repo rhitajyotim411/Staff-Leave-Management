@@ -66,32 +66,39 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
 <body>
     <?php require '../inc/header.php' ?>
-    <h2>Staff:
-        <?php echo $id ?>
-    </h2>
+    <div class="container-fluid text-center mt-3">
+        <h2>Edit for
+            <?php echo $id ?>
+        </h2>
+        <div class="d-flex justify-content-center">
+            <hr>
+        </div>
 
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-        <input type="hidden" name="edit_id" value="<?php echo $id ?>">
-        <table>
-            <tr>
-                <td>
-                    <label for="EL">Earned leave (EL): </label>
-                    <input type="number" name="EL" value="<?php echo $data["EL"] ?>">
-                </td>
-                <td>
-                    <label for="CL">Casual leave (CL): </label>
-                    <input type="number" name="CL" value="<?php echo $data["CL"] ?>">
-                </td>
-                <td>
-                    <label for="SL">Sick leave (SL): </label>
-                    <input type="number" name="SL" value="<?php echo $data["SL"] ?>">
-                </td>
-                <td>
-                    <input type="submit" name="edit_save" class="btn btn-primary" value="Save">
-                </td>
-            </tr>
-        </table>
-    </form>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+            <input type="hidden" name="edit_id" value="<?php echo $id ?>">
+            <div class="d-flex justify-content-center mt-3 mb-3">
+                <table>
+                    <tr>
+                        <td>
+                            <label for="EL">Earned leave (EL): </label>
+                            <input type="number" name="EL" value="<?php echo $data["EL"] ?>">
+                        </td>
+                        <td>
+                            <label for="CL">Casual leave (CL): </label>
+                            <input type="number" name="CL" value="<?php echo $data["CL"] ?>">
+                        </td>
+                        <td>
+                            <label for="SL">Sick leave (SL): </label>
+                            <input type="number" name="SL" value="<?php echo $data["SL"] ?>">
+                        </td>
+                        <td>
+                            <input type="submit" name="edit_save" class="btn btn-primary" value="Save">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

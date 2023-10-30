@@ -42,37 +42,44 @@ if ($stmt->rowCount() < 1) {
 
 <body>
     <?php require '../inc/header.php' ?>
-    <h2>All Staff leaves</h2>
+    <div class="container-fluid text-center mt-3">
+        <h2>All Staff leaves</h2>
+        <div class="d-flex justify-content-center">
+            <hr>
+        </div>
 
-    <table>
-        <tr>
-            <th>UID</th>
-            <th>Earned leave<br>(EL)</th>
-            <th>Casual leave<br>(CL)</th>
-            <th>Sick leave<br>(SL)</th>
-            <th>Action</th>
-        </tr>
-        <?php
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo "<tr>";
-            echo "<td>{$row['UID']}</td>";
-            echo "<td>{$row['EL']}</td>";
-            echo "<td>{$row['CL']}</td>";
-            echo "<td>{$row['SL']}</td>";
-            echo "<td>";
-            echo "<form action=\"./edit.php\" method=\"post\">";
-            echo "<input type=\"hidden\" name=\"stf_id\" value={$row['UID']}>";
-            echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Edit\">";
-            echo "</form>";
-            echo "</td>";
-            echo "</tr>";
-        }
-        ?>
-    </table>
-    <br>
-    <form action="./edit_all.php" method="post">
-        <input type="submit" name="submit" class="btn btn-primary" value="Edit All">
-    </form>
+        <div class="d-flex justify-content-center mt-3 mb-3">
+            <table>
+                <tr>
+                    <th>UID</th>
+                    <th>Earned leave<br>(EL)</th>
+                    <th>Casual leave<br>(CL)</th>
+                    <th>Sick leave<br>(SL)</th>
+                    <th>Action</th>
+                </tr>
+                <?php
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<tr>";
+                    echo "<td>{$row['UID']}</td>";
+                    echo "<td>{$row['EL']}</td>";
+                    echo "<td>{$row['CL']}</td>";
+                    echo "<td>{$row['SL']}</td>";
+                    echo "<td>";
+                    echo "<form action=\"./edit.php\" method=\"post\">";
+                    echo "<input type=\"hidden\" name=\"stf_id\" value={$row['UID']}>";
+                    echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Edit\">";
+                    echo "</form>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </table>
+        </div>
+        
+        <form action="./edit_all.php" method="post">
+            <input type="submit" name="submit" class="btn btn-primary" value="Edit All">
+        </form>
+    </div>
 </body>
 
 </html>
