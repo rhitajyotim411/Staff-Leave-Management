@@ -123,8 +123,7 @@ $lv_types = ['EL', 'CL', 'SL'];
                 echo "Leave request successfully registered<br>";
             }
         } catch (PDOException $e) {
-            echo "Insertion failed: " . $e->getMessage();
-            die("<br><a href='./dashboard.php'>Dashboard</a>");
+            die("Insertion failed: " . $e->getMessage());
         }
         ?>
     </div>

@@ -93,8 +93,7 @@ session_start();
 
         <?php
         if ($stmt->rowCount() < 1) {
-            echo "<p>No leave record found<br></p>";
-            die("<a href='./dashboard.php'>Dashboard</a>");
+            die("<p>No leave record found<br></p>");
         }
         ?>
 

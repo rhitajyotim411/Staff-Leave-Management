@@ -36,8 +36,7 @@ $tbname = "staff_leave";
 $stmt = $conn->query("SELECT * FROM $tbname");
 
 if ($stmt->rowCount() < 1) {
-    echo "<p>No staffs found<br></p>";
-    die("<a href='./dashboard.php'>Dashboard</a>");
+    die("<p>No staffs found<br></p>");
 }
 ?>
 

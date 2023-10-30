@@ -47,8 +47,7 @@ if (isset($_SESSION["staff_uid"])) {
     <?php
     if (isset($_POST['staff'])) {
         if ($_POST['staff'] == "") {
-            echo "<p>Enter staff UID to fetch leave record</p>";
-            die("<a href='./dashboard.php'>Dashboard</a>");
+            die("<p>Enter staff UID to fetch leave record</p>");
         }
 
         require_once '../inc/connect.php';
@@ -59,8 +58,7 @@ if (isset($_SESSION["staff_uid"])) {
 
         $stmt = $conn->query("SELECT * FROM $tbleave WHERE uid='$s_uid'");
         if ($stmt->rowCount() < 1) {
-            echo "<p>Staff UID <b>$s_uid</b> not found<br></p>";
-            die("<a href='./dashboard.php'>Dashboard</a>");
+            die("<p>Staff UID <b>$s_uid</b> not found<br></p>");
         }
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -119,8 +117,7 @@ if (isset($_SESSION["staff_uid"])) {
 
         <?php
         if ($stmt->rowCount() < 1) {
-            echo "<p>No leave record found<br></p>";
-            die("<a href='./dashboard.php'>Dashboard</a>");
+            die("<p>No leave record found<br></p>");
         }
         ?>
 
