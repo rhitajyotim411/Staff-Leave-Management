@@ -33,7 +33,7 @@ session_start();
     }
     ?>
     <div class="row justify-content-center mt-5">
-      <div class="col-sm-4 mt-3 mb-3">
+      <div class="col-md-5 mt-3 mb-3">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Apply for leave</h5>

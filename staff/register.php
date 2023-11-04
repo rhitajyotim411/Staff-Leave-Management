@@ -51,7 +51,7 @@ if (isset($_POST['passwd']))
         }
         ?>
         <div class="row justify-content-center mt-5">
-            <div class="col-sm-3 mt-3 mb-3">
+            <div class="col-md-5 mt-3 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Staff registration</h5>
