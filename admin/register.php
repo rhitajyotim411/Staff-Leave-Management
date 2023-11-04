@@ -61,29 +61,64 @@ if (isset($_POST['passwd']))
                                 <table>
                                     <tr>
                                         <td><label for="uid">Admin ID: </label></td>
-                                        <td><input name="uid" type="text" length="10" maxlength="10" value="<?php echo $uid ?>"></td>
+                                        <td><input name="uid" type="text" length="10" maxlength="10"
+                                                value="<?php echo $uid ?>"></td>
+                                        <td>
+                                            <div class="dropend">
+                                                <button type="button" class="btn btn-outline-light"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    &#8505;
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-item-text">Action 1</li>
+                                                    <li class="dropdown-item-text">Action 2</li>
+                                                    <li class="dropdown-item-text">Action 3</li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><label for="name">Full Name: </label></td>
-                                        <td><input name="name" type="text" length="100" maxlength="255" value="<?php echo $name ?>"></td>
+                                        <td><input name="name" type="text" length="100" maxlength="255"
+                                                value="<?php echo $name ?>"></td>
+                                        <td><!-- Filler --></td>
                                     </tr>
                                     <tr>
                                         <td><label for="passwd">Password: </label></td>
-                                        <td><input name="passwd" type="password" length="100" maxlength="255" value="<?php echo $passwd ?>"></td>
+                                        <td><input name="passwd" type="password" length="100" maxlength="255"
+                                                value="<?php echo $passwd ?>"></td>
+                                        <td>
+                                            <div class="dropend">
+                                                <button type="button" class="btn btn-outline-light"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    &#8505;
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-item-text">Action 1</li>
+                                                    <li class="dropdown-item-text">Action 2</li>
+                                                    <li class="dropdown-item-text">Action 3</li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><img id="captch" src="../inc/captcha.php"></td>
-                                        <td><input type="submit" class="btn btn-primary" value="Refresh"></td>
+                                        <td colspan="2"><input type="submit" class="btn btn-primary" value="Refresh">
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><label for="captcha" name="captcha">Captcha: </label></td>
                                         <td><input type="text" name="captcha" autocomplete="off" /></td>
+                                        <td><!-- Filler --></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><?php echo $vrf; ?></td>
+                                        <td colspan="3">
+                                            <?php echo $vrf; ?>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><input type="submit" name="submit" class="btn btn-primary" value="Verify"></td>
+                                        <td colspan="3"><input type="submit" name="submit" class="btn btn-primary"
+                                                value="Verify"></td>
                                     </tr>
                                 </table>
                             </div>
