@@ -49,7 +49,7 @@ if (isset($_POST['passwd']))
         }
         ?>
         <div class="row justify-content-center mt-5">
-            <div class="col-md-5 mt-3 mb-3">
+            <div class="col-md-6 mt-3 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Staff login</h5>
@@ -59,25 +59,60 @@ if (isset($_POST['passwd']))
                                 <table>
                                     <tr>
                                         <td><label for="uid">Staff ID: </label></td>
-                                        <td><input name="uid" type="text" length="10" maxlength="10" value="<?php echo $uid ?>"></td>
+                                        <td><input name="uid" type="text" length="10" maxlength="10"
+                                                value="<?php echo $uid ?>"></td>
+                                        <td>
+                                            <div class="dropend">
+                                                <button type="button" class="btn btn-outline-light"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    &#8505;
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-item-text">Max. length 10</li>
+                                                    <li class="dropdown-item-text">Alphabets, Numbers only</li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><label for="passwd">Password: </label></td>
-                                        <td><input name="passwd" type="password" length="100" maxlength="255" value="<?php echo $passwd ?>"></td>
+                                        <td><input name="passwd" type="password" length="100" maxlength="255"
+                                                value="<?php echo $passwd ?>"></td>
+                                        <td>
+                                            <div class="dropend">
+                                                <button type="button" class="btn btn-outline-light"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                    &#8505;
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li class="dropdown-item-text">Min. length 5</li>
+                                                    <li class="dropdown-item-text">Alphabets, Numbers, @, _ only</li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td><img id="captch" src="../inc/captcha.php"></td>
                                         <td><input type="submit" class="btn btn-primary" value="Refresh"></td>
+                                        <td><!-- Filler --></td>
                                     </tr>
                                     <tr>
                                         <td><label for="captcha" name="captcha">Captcha: </label></td>
                                         <td><input type="text" name="captcha" autocomplete="off" /></td>
+                                        <td><!-- Filler --></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><?php echo $vrf; ?></td>
+                                        <td><!-- Filler --></td>
+                                        <td>
+                                            <?php echo $vrf; ?>
+                                        </td>
+                                        <td><!-- Filler --></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2"><input type="submit" name="submit" class="btn btn-primary" value="Verify"></td>
+                                        <td><!-- Filler --></td>
+                                        <td><input type="submit" name="submit" class="btn btn-primary" value="Verify">
+                                        </td>
+                                        <td><!-- Filler --></td>
                                     </tr>
                                 </table>
                             </div>
