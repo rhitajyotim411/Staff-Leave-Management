@@ -18,24 +18,64 @@ session_start();
 </head>
 
 <?php
-$vrf = '';
+function validateInput($data, $minLength, $maxLength, $allowedChars)
+{
+    $data = trim(htmlspecialchars($data));
+    if (strlen($data) < $minLength || strlen($data) > $maxLength) {
+        return false;
+    }
+    // Check if data contains only allowed characters
+    if (preg_match("/^[{$allowedChars}]+$/", $data)) {
+        return true;
+    }
+    return false;
+}
+
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data); // prevents JS injection attack
+    return $data;
+}
+
+$msg = '';
 
 // If user has given a captcha!
 if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != '')
     // If the captcha is valid
     if ($_POST['captcha'] == $_SESSION['captcha']) {
-        $_SESSION["post"] = $_POST;
-        die(header("Location: ./login_db.php"));
+        // form validation
+        if (isset($_POST['uid'])) {
+            $flag = validateInput($_POST['uid'], 1, 10, 'A-Za-z0-9');
+            if (!$flag) {
+                if (strlen($msg) > 0)
+                    $msg .= '<br/>';
+                $msg .= '<span style="color: #f44900">Invalid Admin ID format!</span>';
+            }
+        }
+        if (isset($_POST['passwd'])) {
+            $flag = validateInput($_POST['passwd'], 5, 255, 'A-Za-z0-9_@');
+            if (!$flag) {
+                if (strlen($msg) > 0)
+                    $msg .= '<br/>';
+                $msg .= '<span style="color: #f44900">Invalid Password format!</span>';
+            }
+        }
+        if (strlen($msg) < 1) {
+            $_SESSION["post"] = $_POST;
+            die(header("Location: ./login_db.php"));
+        }
     } else {
-        $vrf = '<span style="color:red">CAPTCHA FAILED!!!</span>';
+        $msg = '<span style="color: #f44900">CAPTCHA FAILED!!!</span>';
     }
 
 $uid = $passwd = "";
 
 if (isset($_POST['uid']))
-    $uid = $_POST['uid'];
+    $uid = test_input($_POST['uid']);
 if (isset($_POST['passwd']))
-    $passwd = $_POST['passwd'];
+    $passwd = test_input($_POST['passwd']);
 ?>
 
 <body>
@@ -86,6 +126,7 @@ if (isset($_POST['passwd']))
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li class="dropdown-item-text">Min. length 5</li>
+                                                    <li class="dropdown-item-text">Max. length 255</li>
                                                     <li class="dropdown-item-text">Alphabets, Numbers, @, _ only</li>
                                                 </ul>
                                             </div>
@@ -104,7 +145,7 @@ if (isset($_POST['passwd']))
                                     <tr>
                                         <td><!-- Filler --></td>
                                         <td>
-                                            <?php echo $vrf; ?>
+                                            <?php echo $msg; ?>
                                         </td>
                                         <td><!-- Filler --></td>
                                     </tr>

@@ -18,7 +18,7 @@ session_start();
 </head>
 
 <?php
-$vrf = '';
+$msg = '';
 
 // If user has given a captcha!
 if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != '')
@@ -27,7 +27,7 @@ if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != 
         $_SESSION["post"] = $_POST;
         die(header("Location: ./register_db.php"));
     } else {
-        $vrf = '<span style="color:red">CAPTCHA FAILED!!!</span>';
+        $msg = '<span style="color: #f44900">CAPTCHA FAILED!!!</span>';
     }
 
 $uid = $name = $passwd = "";
@@ -94,6 +94,7 @@ if (isset($_POST['passwd']))
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li class="dropdown-item-text">Min. length 5</li>
+                                                    <li class="dropdown-item-text">Max. length 255</li>
                                                     <li class="dropdown-item-text">Alphabets, Numbers, @, _ only</li>
                                                 </ul>
                                             </div>
@@ -112,7 +113,7 @@ if (isset($_POST['passwd']))
                                     <tr>
                                         <td><!-- Filler --></td>
                                         <td>
-                                            <?php echo $vrf; ?>
+                                            <?php echo $msg; ?>
                                         </td>
                                         <td><!-- Filler --></td>
                                     </tr>

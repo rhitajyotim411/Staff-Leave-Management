@@ -49,7 +49,7 @@ session_start();
                 $_SESSION['type'] = 'staff';
                 header("Location: ./dashboard.php");
             } else {
-                echo "<span style=\"color:red\">Wrong password</span><br>";
+                echo "<span style=\"color: #f44900\">Wrong password</span><br>";
                 echo "Redirecting to login...";
                 header("refresh:2; URL=./login.php");
             }

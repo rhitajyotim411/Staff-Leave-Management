@@ -21,12 +21,12 @@ session_start();
     <div class="container-fluid text-center mt-5">
         <?php
         if (!isset($_SESSION['UID'])) {
-        ?>
+            ?>
             <h5>
                 No user logged in <br>
                 Redirecting...
             </h5>
-        <?php
+            <?php
             die(header("refresh:2; URL=../index.php"));
         }
 
@@ -38,7 +38,6 @@ session_start();
             session_destroy();
         } catch (\Throwable $th) {
             die("<h5>$uid cannot be logged out</h5>");
-            die("<br><a href=\"../{$_SESSION['type']}/dashboard.php\">Dashboard</a>");
         }
         ?>
         <h5>
