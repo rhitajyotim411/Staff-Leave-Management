@@ -9,6 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Leaves</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -42,7 +43,7 @@ session_start();
             die("<p>No staffs found<br></p>");
         }
         ?>
-        
+
         <h2>All Staff leaves</h2>
         <div class="d-flex justify-content-center">
             <hr>
