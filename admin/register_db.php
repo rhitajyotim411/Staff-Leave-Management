@@ -57,10 +57,8 @@ session_start();
                 die("<br><a class=\"ref\" href='../index.php'>Homepage</a>");
             }
 
-            $_SESSION['UID'] = $uid;
-            $_SESSION['name'] = $name;
-            $_SESSION['type'] = 'admin';
-            header("Location: ./dashboard.php");
+            echo "<h5>Registered Successfully</h5>";
+            echo "<a class=\"ref\" href='./login.php'>Login here</a>";
         }
         ?>
     </div>
