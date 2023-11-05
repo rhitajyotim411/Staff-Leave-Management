@@ -51,7 +51,7 @@ if (isset($_POST['passwd']))
         }
         ?>
         <div class="row justify-content-center mt-5">
-            <div class="col-md-5 mt-3 mb-3">
+            <div class="col-md-6 mt-3 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Admin registration</h5>
@@ -70,9 +70,8 @@ if (isset($_POST['passwd']))
                                                     &#8505;
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li class="dropdown-item-text">Action 1</li>
-                                                    <li class="dropdown-item-text">Action 2</li>
-                                                    <li class="dropdown-item-text">Action 3</li>
+                                                    <li class="dropdown-item-text">Max. length 10</li>
+                                                    <li class="dropdown-item-text">Alphabets, Numbers only</li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -94,17 +93,16 @@ if (isset($_POST['passwd']))
                                                     &#8505;
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li class="dropdown-item-text">Action 1</li>
-                                                    <li class="dropdown-item-text">Action 2</li>
-                                                    <li class="dropdown-item-text">Action 3</li>
+                                                    <li class="dropdown-item-text">Min. length 5</li>
+                                                    <li class="dropdown-item-text">Alphabets, Numbers, @, _ only</li>
                                                 </ul>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td><img id="captch" src="../inc/captcha.php"></td>
-                                        <td colspan="2"><input type="submit" class="btn btn-primary" value="Refresh">
-                                        </td>
+                                        <td><input type="submit" class="btn btn-primary" value="Refresh"></td>
+                                        <td><!-- Filler --></td>
                                     </tr>
                                     <tr>
                                         <td><label for="captcha" name="captcha">Captcha: </label></td>
@@ -112,13 +110,17 @@ if (isset($_POST['passwd']))
                                         <td><!-- Filler --></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">
+                                        <td><!-- Filler --></td>
+                                        <td>
                                             <?php echo $vrf; ?>
                                         </td>
+                                        <td><!-- Filler --></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3"><input type="submit" name="submit" class="btn btn-primary"
-                                                value="Verify"></td>
+                                        <td><!-- Filler --></td>
+                                        <td><input type="submit" name="submit" class="btn btn-primary" value="Verify">
+                                        </td>
+                                        <td><!-- Filler --></td>
                                     </tr>
                                 </table>
                             </div>
