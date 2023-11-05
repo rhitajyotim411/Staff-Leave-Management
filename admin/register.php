@@ -10,6 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Register</title>
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -114,9 +115,9 @@ if (isset($_POST['passwd']))
                                                 value="<?php echo $uid ?>"></td>
                                         <td>
                                             <div class="dropend">
-                                                <button type="button" class="btn btn-outline-light"
+                                                <button type="button" class="btn btn-outline-info"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                                    &#8505;
+                                                    <i class="fa fa-info-circle" style="font-size:20px"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li class="dropdown-item-text">Max. length 10</li>
@@ -137,9 +138,9 @@ if (isset($_POST['passwd']))
                                                 value="<?php echo $passwd ?>"></td>
                                         <td>
                                             <div class="dropend">
-                                                <button type="button" class="btn btn-outline-light"
+                                                <button type="button" class="btn btn-outline-info"
                                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                                    &#8505;
+                                                    <i class="fa fa-info-circle" style="font-size:20px"></i>
                                                 </button>
                                                 <ul class="dropdown-menu">
                                                     <li class="dropdown-item-text">Min. length 5</li>
