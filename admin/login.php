@@ -20,12 +20,12 @@ session_start();
 <?php
 function validateInput($data, $minLength, $maxLength, $allowedChars)
 {
-    $data = trim(htmlspecialchars($data));
+    $data = trim(stripslashes($data));
     if (strlen($data) < $minLength || strlen($data) > $maxLength) {
         return false;
     }
     // Check if data contains only allowed characters
-    if (preg_match("/^[{$allowedChars}]+$/", $data)) {
+    if (preg_match("/^[$allowedChars]+$/u", $data)) {
         return true;
     }
     return false;

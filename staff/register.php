@@ -18,14 +18,62 @@ session_start();
 </head>
 
 <?php
+function validateInput($data, $minLength, $maxLength, $allowedChars)
+{
+    $data = trim(stripslashes($data));
+    if (strlen($data) < $minLength || strlen($data) > $maxLength) {
+        return false;
+    }
+    // Check if data contains only allowed characters
+    if (preg_match("/^[$allowedChars]+$/u", $data)) {
+        return true;
+    }
+    return false;
+}
+
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data); // prevents JS injection attack
+    return $data;
+}
+
 $msg = '';
 
 // If user has given a captcha!
 if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != '')
     // If the captcha is valid
     if ($_POST['captcha'] == $_SESSION['captcha']) {
-        $_SESSION["post"] = $_POST;
-        die(header("Location: ./register_db.php"));
+        // form validation
+        if (isset($_POST['uid'])) {
+            $flag = validateInput($_POST['uid'], 1, 10, 'A-Za-z0-9');
+            if (!$flag) {
+                if (strlen($msg) > 0)
+                    $msg .= '<br/>';
+                $msg .= '<span style="color: #f44900">Invalid Staff ID format!</span>';
+            }
+        }
+        if (isset($_POST['name'])) {
+            $flag = validateInput($_POST['name'], 1, 255, "A-Za-z'. ");
+            if (!$flag) {
+                if (strlen($msg) > 0)
+                    $msg .= '<br/>';
+                $msg .= '<span style="color: #f44900">Invalid Name format!</span>';
+            }
+        }
+        if (isset($_POST['passwd'])) {
+            $flag = validateInput($_POST['passwd'], 5, 255, 'A-Za-z0-9_@');
+            if (!$flag) {
+                if (strlen($msg) > 0)
+                    $msg .= '<br/>';
+                $msg .= '<span style="color: #f44900">Invalid Password format!</span>';
+            }
+        }
+        if (strlen($msg) < 1) {
+            $_SESSION["post"] = $_POST;
+            die(header("Location: ./register_db.php"));
+        }
     } else {
         $msg = '<span style="color: #f44900">CAPTCHA FAILED!!!</span>';
     }
@@ -33,11 +81,11 @@ if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != 
 $uid = $name = $passwd = "";
 
 if (isset($_POST['uid']))
-    $uid = $_POST['uid'];
+    $uid = test_input($_POST['uid']);
 if (isset($_POST['name']))
-    $name = $_POST['name'];
+    $name = test_input($_POST['name']);
 if (isset($_POST['passwd']))
-    $passwd = $_POST['passwd'];
+    $passwd = test_input($_POST['passwd']);
 ?>
 
 <body>

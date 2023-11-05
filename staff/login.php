@@ -20,12 +20,12 @@ session_start();
 <?php
 function validateInput($data, $minLength, $maxLength, $allowedChars)
 {
-    $data = trim(htmlspecialchars($data));
+    $data = trim(stripslashes($data));
     if (strlen($data) < $minLength || strlen($data) > $maxLength) {
         return false;
     }
     // Check if data contains only allowed characters
-    if (preg_match("/^[{$allowedChars}]+$/", $data)) {
+    if (preg_match("/^[$allowedChars]+$/u", $data)) {
         return true;
     }
     return false;
@@ -51,7 +51,7 @@ if (isset($_POST['captcha']) && isset($_POST['submit']) && $_POST['captcha'] != 
             if (!$flag) {
                 if (strlen($msg) > 0)
                     $msg .= '<br/>';
-                $msg .= '<span style="color: #f44900">Invalid Admin ID format!</span>';
+                $msg .= '<span style="color: #f44900">Invalid Staff ID format!</span>';
             }
         }
         if (isset($_POST['passwd'])) {
