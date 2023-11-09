@@ -41,39 +41,41 @@ session_start();
             <p class="card-text">
             <form action="./leave_db.php" method="post">
               <div class="d-flex justify-content-center mt-3 mb-3">
-                <table>
-                  <!--Types of leave-->
-                  <tr>
-                    <td>
-                      <label for="leave_type">Select type of leave:</label>
-                    </td>
-                    <td>
-                      <select name="leave_type">
-                        <option value="EL">Earned Leave (EL)</option>
-                        <option value="CL">Casual Leave (CL)</option>
-                        <option value="SL">Sick Leave (SL)</option>
-                        <option value="OP">Outdoor duty (OP)</option>
-                        <option value="LWP">Leave Without Pay (LWP)</option>
-                      </select>
-                    </td>
-                  </tr>
+                <div class="overflow-auto">
+                  <table>
+                    <!--Types of leave-->
+                    <tr>
+                      <td>
+                        <label for="leave_type">Select type of leave:</label>
+                      </td>
+                      <td>
+                        <select name="leave_type">
+                          <option value="EL">Earned Leave (EL)</option>
+                          <option value="CL">Casual Leave (CL)</option>
+                          <option value="SL">Sick Leave (SL)</option>
+                          <option value="OP">Outdoor duty (OP)</option>
+                          <option value="LWP">Leave Without Pay (LWP)</option>
+                        </select>
+                      </td>
+                    </tr>
 
-                  <!--Duration-->
-                  <tr>
-                    <td><label for="from">From: </label></td>
-                    <td><input type="date" name="from" /></td>
-                  </tr>
-                  <tr>
-                    <td><label for="to">To: </label></td>
-                    <td><input type="date" name="to" /></td>
-                  </tr>
+                    <!--Duration-->
+                    <tr>
+                      <td><label for="from">From: </label></td>
+                      <td><input type="date" name="from" /></td>
+                    </tr>
+                    <tr>
+                      <td><label for="to">To: </label></td>
+                      <td><input type="date" name="to" /></td>
+                    </tr>
 
-                  <tr>
-                    <td colspan="2">
-                      <input type="submit" class="btn btn-primary" />
-                    </td>
-                  </tr>
-                </table>
+                    <tr>
+                      <td colspan="2">
+                        <input type="submit" class="btn btn-primary" />
+                      </td>
+                    </tr>
+                  </table>
+                </div>
               </div>
             </form>
             </p>

@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff leave record</title>
-  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -71,7 +71,7 @@ session_start();
             } else
                 $query = "SELECT $fields FROM $tbrec WHERE uid='$s_uid' ORDER BY `From`";
             $stmt = $conn->query($query);
-        ?>
+            ?>
             <div class="d-flex justify-content-center">
                 <hr>
             </div>
@@ -84,25 +84,27 @@ session_start();
 
             <h3>Leaves available: -</h3>
             <div class="d-flex justify-content-center mt-3 mb-3">
-                <table>
-                    <tr>
-                        <td>Earned leave (EL):
-                            <?php echo $data["EL"] ?>
-                        </td>
-                        <td>Casual leave (CL):
-                            <?php echo $data["CL"] ?>
-                        </td>
-                        <td>Sick leave (SL):
-                            <?php echo $data["SL"] ?>
-                        </td>
-                        <td>
-                            <form action="./edit.php" method="post">
-                                <input type="hidden" name="stf_id" value=<?php echo $s_uid ?>>
-                                <input type="submit" name="submit" class="btn btn-primary" value="Edit">
-                            </form>
-                        </td>
-                    </tr>
-                </table>
+                <div class="overflow-auto">
+                    <table>
+                        <tr>
+                            <td>Earned leave (EL):
+                                <?php echo $data["EL"] ?>
+                            </td>
+                            <td>Casual leave (CL):
+                                <?php echo $data["CL"] ?>
+                            </td>
+                            <td>Sick leave (SL):
+                                <?php echo $data["SL"] ?>
+                            </td>
+                            <td>
+                                <form action="./edit.php" method="post">
+                                    <input type="hidden" name="stf_id" value=<?php echo $s_uid ?>>
+                                    <input type="submit" name="submit" class="btn btn-primary" value="Edit">
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <h3>Leaves recorded: -</h3>
@@ -112,15 +114,15 @@ session_start();
                 <label for="filter">Filter:</label>
                 <select name="filter">
                     <option value="All" <?php if ($fltr === "")
-                                            echo "selected" ?>>All</option>
-                    <option value="Approved" <?php if ($fltr === "Approved")
-                                                    echo "selected" ?>>Approved</option>
-                    <option value="Denied" <?php if ($fltr === "Denied")
-                                                echo "selected" ?>>Denied</option>
-                    <option value="Pending" <?php if ($fltr === "Pending")
-                                                echo "selected" ?>>Pending</option>
-                </select>
-                <input type="hidden" name="fltr_id" value="<?php echo $_POST['staff'] ?>">
+                        echo "selected" ?>>All</option>
+                        <option value="Approved" <?php if ($fltr === "Approved")
+                        echo "selected" ?>>Approved</option>
+                        <option value="Denied" <?php if ($fltr === "Denied")
+                        echo "selected" ?>>Denied</option>
+                        <option value="Pending" <?php if ($fltr === "Pending")
+                        echo "selected" ?>>Pending</option>
+                    </select>
+                    <input type="hidden" name="fltr_id" value="<?php echo $_POST['staff'] ?>">
                 <input type="submit" name="fltr_lv" class="btn btn-primary" value="Filter">
             </form>
             </p>
@@ -132,52 +134,54 @@ session_start();
             ?>
 
             <div class="d-flex justify-content-center mt-3 mb-3">
-                <table>
-                    <tr>
-                        <th>Type</th>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Days</th>
-                        <th>Status</th>
-                        <th colspan=2>Actions</th>
-                    </tr>
-                    <?php
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        if ($row['Status'] === 'Approved')
-                            $clr = 'green';
-                        elseif ($row['Status'] === 'Denied')
-                            $clr = 'red';
-                        else
-                            $clr = 'black';
+                <div class="overflow-auto">
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Days</th>
+                            <th>Status</th>
+                            <th colspan=2>Actions</th>
+                        </tr>
+                        <?php
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            if ($row['Status'] === 'Approved')
+                                $clr = 'green';
+                            elseif ($row['Status'] === 'Denied')
+                                $clr = 'red';
+                            else
+                                $clr = 'black';
 
-                        echo "<tr>";
-                        echo "<td>{$row['Type']}</td>";
-                        echo "<td>{$row['From']}</td>";
-                        echo "<td>{$row['To']}</td>";
-                        echo "<td style=\"text-align: center\">{$row['Days']}</td>";
-                        echo "<td style=\"color: $clr\">{$row['Status']}</td>";
-                        echo "<td>";
-                        if ($row['Status'] === 'Pending') {
-                            echo "<form action=\"./approve.php\" method=\"post\">";
-                            echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
-                            echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Approve\">";
-                            echo "</form>";
+                            echo "<tr>";
+                            echo "<td>{$row['Type']}</td>";
+                            echo "<td>{$row['From']}</td>";
+                            echo "<td>{$row['To']}</td>";
+                            echo "<td style=\"text-align: center\">{$row['Days']}</td>";
+                            echo "<td style=\"color: $clr\">{$row['Status']}</td>";
+                            echo "<td>";
+                            if ($row['Status'] === 'Pending') {
+                                echo "<form action=\"./approve.php\" method=\"post\">";
+                                echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
+                                echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Approve\">";
+                                echo "</form>";
+                            }
+                            echo "</td>";
+                            echo "<td>";
+                            if ($row['Status'] === 'Pending') {
+                                echo "<form action=\"./deny.php\" method=\"post\">";
+                                echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
+                                echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Deny\">";
+                                echo "</form>";
+                            }
+                            echo "</td>";
+                            echo "</tr>";
                         }
-                        echo "</td>";
-                        echo "<td>";
-                        if ($row['Status'] === 'Pending') {
-                            echo "<form action=\"./deny.php\" method=\"post\">";
-                            echo "<input type=\"hidden\" name=\"lv_sn\" value={$row['SN']}>";
-                            echo "<input type=\"submit\" name=\"submit\" class=\"btn btn-primary\" value=\"Deny\">";
-                            echo "</form>";
-                        }
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </table>
+                        ?>
+                    </table>
+                </div>
             </div>
-        <?php
+            <?php
         }
         ?>
     </div>

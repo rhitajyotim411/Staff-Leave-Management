@@ -9,8 +9,8 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Register</title>
-  <link rel="icon" type="image/x-icon" href="../favicon.ico">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -108,72 +108,76 @@ if (isset($_POST['passwd']))
                         <p class="card-text">
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
                             <div class="d-flex justify-content-center">
-                                <table>
-                                    <tr>
-                                        <td><label for="uid">Admin ID: </label></td>
-                                        <td><input name="uid" type="text" length="10" maxlength="10"
-                                                value="<?php echo $uid ?>"></td>
-                                        <td>
-                                            <div class="dropend">
-                                                <button type="button" class="btn btn-outline-info"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa fa-info-circle" style="font-size:20px"></i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li class="dropdown-item-text">Max. length 10</li>
-                                                    <li class="dropdown-item-text">Alphabets, Numbers only</li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="name">Full Name: </label></td>
-                                        <td><input name="name" type="text" length="100" maxlength="255"
-                                                value="<?php echo $name ?>"></td>
-                                        <td><!-- Filler --></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="passwd">Password: </label></td>
-                                        <td><input name="passwd" type="password" length="100" maxlength="255"
-                                                value="<?php echo $passwd ?>"></td>
-                                        <td>
-                                            <div class="dropend">
-                                                <button type="button" class="btn btn-outline-info"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fa fa-info-circle" style="font-size:20px"></i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li class="dropdown-item-text">Min. length 5</li>
-                                                    <li class="dropdown-item-text">Max. length 255</li>
-                                                    <li class="dropdown-item-text">Alphabets, Numbers, @, _ only</li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><img id="captch" src="../inc/captcha.php"></td>
-                                        <td><input type="submit" class="btn btn-primary" value="Refresh"></td>
-                                        <td><!-- Filler --></td>
-                                    </tr>
-                                    <tr>
-                                        <td><label for="captcha" name="captcha">Captcha: </label></td>
-                                        <td><input type="text" name="captcha" autocomplete="off" /></td>
-                                        <td><!-- Filler --></td>
-                                    </tr>
-                                    <tr>
-                                        <td><!-- Filler --></td>
-                                        <td>
-                                            <?php echo $msg; ?>
-                                        </td>
-                                        <td><!-- Filler --></td>
-                                    </tr>
-                                    <tr>
-                                        <td><!-- Filler --></td>
-                                        <td><input type="submit" name="submit" class="btn btn-primary" value="Verify">
-                                        </td>
-                                        <td><!-- Filler --></td>
-                                    </tr>
-                                </table>
+                                <div class="overflow-auto">
+                                    <table>
+                                        <tr>
+                                            <td><label for="uid">Admin ID: </label></td>
+                                            <td><input name="uid" type="text" length="10" maxlength="10"
+                                                    value="<?php echo $uid ?>"></td>
+                                            <td>
+                                                <div class="dropend">
+                                                    <button type="button" class="btn btn-outline-info"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa fa-info-circle" style="font-size:20px"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="dropdown-item-text">Max. length 10</li>
+                                                        <li class="dropdown-item-text">Alphabets, Numbers only</li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="name">Full Name: </label></td>
+                                            <td><input name="name" type="text" length="100" maxlength="255"
+                                                    value="<?php echo $name ?>"></td>
+                                            <td><!-- Filler --></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="passwd">Password: </label></td>
+                                            <td><input name="passwd" type="password" length="100" maxlength="255"
+                                                    value="<?php echo $passwd ?>"></td>
+                                            <td>
+                                                <div class="dropend">
+                                                    <button type="button" class="btn btn-outline-info"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fa fa-info-circle" style="font-size:20px"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li class="dropdown-item-text">Min. length 5</li>
+                                                        <li class="dropdown-item-text">Max. length 255</li>
+                                                        <li class="dropdown-item-text">Alphabets, Numbers, @, _ only
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><img id="captch" src="../inc/captcha.php"></td>
+                                            <td><input type="submit" class="btn btn-primary" value="Refresh"></td>
+                                            <td><!-- Filler --></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for="captcha" name="captcha">Captcha: </label></td>
+                                            <td><input type="text" name="captcha" autocomplete="off" /></td>
+                                            <td><!-- Filler --></td>
+                                        </tr>
+                                        <tr>
+                                            <td><!-- Filler --></td>
+                                            <td>
+                                                <?php echo $msg; ?>
+                                            </td>
+                                            <td><!-- Filler --></td>
+                                        </tr>
+                                        <tr>
+                                            <td><!-- Filler --></td>
+                                            <td><input type="submit" name="submit" class="btn btn-primary"
+                                                    value="Verify">
+                                            </td>
+                                            <td><!-- Filler --></td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </form>
                         </p>

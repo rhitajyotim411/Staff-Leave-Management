@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Leave</title>
-  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -78,25 +78,27 @@ session_start();
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
             <input type="hidden" name="edit_id" value="<?php echo $id ?>">
             <div class="d-flex justify-content-center mt-3 mb-3">
-                <table>
-                    <tr>
-                        <td>
-                            <label for="EL">Earned leave (EL): </label>
-                            <input type="number" name="EL" value="<?php echo $data["EL"] ?>">
-                        </td>
-                        <td>
-                            <label for="CL">Casual leave (CL): </label>
-                            <input type="number" name="CL" value="<?php echo $data["CL"] ?>">
-                        </td>
-                        <td>
-                            <label for="SL">Sick leave (SL): </label>
-                            <input type="number" name="SL" value="<?php echo $data["SL"] ?>">
-                        </td>
-                        <td>
-                            <input type="submit" name="edit_save" class="btn btn-primary" value="Save">
-                        </td>
-                    </tr>
-                </table>
+                <div class="overflow-auto">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="EL">Earned leave (EL): </label>
+                                <input type="number" name="EL" value="<?php echo $data["EL"] ?>">
+                            </td>
+                            <td>
+                                <label for="CL">Casual leave (CL): </label>
+                                <input type="number" name="CL" value="<?php echo $data["CL"] ?>">
+                            </td>
+                            <td>
+                                <label for="SL">Sick leave (SL): </label>
+                                <input type="number" name="SL" value="<?php echo $data["SL"] ?>">
+                            </td>
+                            <td>
+                                <input type="submit" name="edit_save" class="btn btn-primary" value="Save">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </form>
     </div>
