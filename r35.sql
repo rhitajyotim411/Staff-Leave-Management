@@ -36,7 +36,7 @@ CREATE TABLE `admin_login` (
 
 LOCK TABLES `admin_login` WRITE;
 /*!40000 ALTER TABLE `admin_login` DISABLE KEYS */;
-INSERT INTO `admin_login` VALUES ('admin1','Dipti Gupta','$2y$10$lBMwO7FRzF.5rozdKellfuYksf2qFpawt6ctxrNsVdBsK4wD3sgza'),('admin2','Kashi Choudhary','$2y$10$ySzr3.Y9N5KBNF0Fku4xre2CXCoXTu/NgJgQKzRN1lrrYXvtiynCi'),('admin3','Aryan Gupta','$2y$10$r/7aJnapi/RQKbHmv8d9Z.6k6BcSMWEtGcVyLUvu.oXucG335AWj2'),('admin4','Jayashri Mishra','$2y$10$AKusfp3NgSGSTq/Ha3EN0uV0AI5LnlPDCkT/CacwPdnlWENid783y');
+INSERT INTO `admin_login` VALUES ('admin1','Dipti Gupta','$2y$10$lBMwO7FRzF.5rozdKellfuYksf2qFpawt6ctxrNsVdBsK4wD3sgza'),('admin2','Koyel Choudhary','$2y$10$ySzr3.Y9N5KBNF0Fku4xre2CXCoXTu/NgJgQKzRN1lrrYXvtiynCi'),('admin3','Aryan Gupta','$2y$10$r/7aJnapi/RQKbHmv8d9Z.6k6BcSMWEtGcVyLUvu.oXucG335AWj2'),('admin4','Jayashri Mishra','$2y$10$AKusfp3NgSGSTq/Ha3EN0uV0AI5LnlPDCkT/CacwPdnlWENid783y');
 /*!40000 ALTER TABLE `admin_login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `leave_record` (
   CONSTRAINT `admin_app_fk` FOREIGN KEY (`Admin`) REFERENCES `admin_login` (`UID`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `staff_rec_fk` FOREIGN KEY (`UID`) REFERENCES `staff_login` (`UID`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `status_ck` CHECK (`Status` in ('Pending','Approved','Denied'))
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `staff_login` (
 
 LOCK TABLES `staff_login` WRITE;
 /*!40000 ALTER TABLE `staff_login` DISABLE KEYS */;
-INSERT INTO `staff_login` VALUES ('staff1','Pratik Das','$2y$10$oVeaN2Ek6WugGp4oyOKcmOALQl0U57Xe/b4A5LNhIZxYiwEHPZP3u'),('staff2','Manjusha Choudhary','$2y$10$Ca28Vet489B8a6SOXn5fuel/SHynVQ4fiAjiSHlz1GFHsIkpHBV56'),('staff3','Samir Das','$2y$10$O.f1qxneUeoOrglsyDb96ulAaShyKTexupaO8eiaImhHzb3zr/HQS'),('staff4','Noyon Das','$2y$10$KGEmNHwxdF.SxIZ9LMcDCe9NmzJsLIdxMcl0OM8xdrHd4LQC702rG');
+INSERT INTO `staff_login` VALUES ('staff1','Pratik Das','$2y$10$oVeaN2Ek6WugGp4oyOKcmOALQl0U57Xe/b4A5LNhIZxYiwEHPZP3u'),('staff2','Manjusha Choudhary','$2y$10$Ca28Vet489B8a6SOXn5fuel/SHynVQ4fiAjiSHlz1GFHsIkpHBV56'),('staff3','Samir Das','$2y$10$O.f1qxneUeoOrglsyDb96ulAaShyKTexupaO8eiaImhHzb3zr/HQS'),('staff4','Noyon Ghosh','$2y$10$KGEmNHwxdF.SxIZ9LMcDCe9NmzJsLIdxMcl0OM8xdrHd4LQC702rG');
 /*!40000 ALTER TABLE `staff_login` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -136,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-09  0:41:01
+-- Dump completed on 2023-11-09 12:55:13
