@@ -11,6 +11,7 @@ The **Staff Leave Management System** is a comprehensive tool designed to stream
 - **Leave Balance Tracking:** Employees can view their leave balances, and the system will automatically update balances as leave is used.
 - **Leave History:** A detailed history of all leave requests, approvals, and denials is maintained for future reference.
 - **User Roles:** Different access levels for employees and administrators.
+- **Responsive Design:** Built using Bootstrap 5 for a mobile-friendly and responsive interface.
 
 ## Usage
 
